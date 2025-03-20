@@ -1,0 +1,22 @@
+.fixed-buttons {
+    position: fixed;
+    top: 10px;  /* Keep at the top */
+    left: 10px;  /* Keep on the left */
+}
+
+.fixed-buttons a {
+    display: block;
+    color: white;  /* White text color */
+    padding: 5px 0;
+    margin: 5px 0;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;  /* Adjust as needed */
+    white-space: nowrap;  /* Prevent text wrapping */
+    text-shadow: 2px 2px 4px black; /* Black outline effect */
+    transition: transform 0.2s ease-in-out; /* Smooth size transition */
+}
+
+.fixed-buttons a:hover {
+    transform: scale(1.1); /* Slightly increase text size on hover */
+}
