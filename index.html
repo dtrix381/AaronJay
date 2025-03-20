@@ -117,6 +117,7 @@
         background: linear-gradient(45deg, #FFD700, #FF4500, #FFD700); /* Gold & Orange */
         box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); /* Glowing effect */
         animation: glow 1.5s infinite alternate;
+        text-align: center;
     }
 
     @keyframes glow {
@@ -128,13 +129,25 @@
         width: 100%;
         border-radius: 10px;
     }
+
+    .clip-title {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 10px;
+        color: #FFD700; /* Gold */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        font-family: Arial, sans-serif;
+    }
 </style>
 
+<div class="clip-title">𝗧𝗼𝗽 𝗖𝗹𝗶𝗽𝘀</div>
 <div class="video-container">
     <video controls>
         <source src="Clip001.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 </div>
-</body>
+
+
 </html>
