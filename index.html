@@ -76,9 +76,49 @@
     <div class="fixed-buttons">
         <a href="deposit-event.html">𝗔𝗿𝗰𝘁𝗶𝗰𝗯𝗲𝘁𝘀 𝗗𝗲𝗽𝗼𝘀𝗶𝘁 𝗘𝘃𝗲𝗻𝘁𝘀</a>
     </div>
-    <div class="container text-center mt-5">
-        <img src="AaronJay.png" alt="Aaron Jay" class="img-fluid rounded-circle" width="150">
-        <h1>𝔸𝔸ℝ𝕆ℕ 𝕁𝔸𝕐</h1>
+    <style>
+    /* Centered Container */
+    .container {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    /* Profile Image Styling */
+    .profile-image {
+        width: 150px;
+        border-radius: 50%;
+        border: 4px solid #FFD700; /* Yellow Outline */
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        transition: transform 0.5s ease-in-out;
+    }
+
+    /* Rotate Image on Hover */
+    .profile-image:hover {
+        transform: rotate(360deg);
+    }
+
+    /* Name Styling */
+    .profile-name {
+        font-size: 36px;
+        font-weight: bold;
+        color: #00FF00; /* Green Color */
+        text-shadow: 3px 3px 10px rgba(0, 255, 0, 0.8); /* Green Glow */
+        animation: flicker 1.5s infinite alternate;
+    }
+
+    /* Flicker Animation for Text */
+    @keyframes flicker {
+        0% { opacity: 1; text-shadow: 3px 3px 10px rgba(0, 255, 0, 1); }
+        50% { opacity: 0.8; text-shadow: 3px 3px 15px rgba(0, 200, 0, 0.8); }
+        100% { opacity: 1; text-shadow: 3px 3px 10px rgba(0, 255, 0, 1); }
+    }
+</style>
+
+<!-- Profile Section -->
+<div class="container">
+    <img src="AaronJay.png" alt="Aaron Jay" class="profile-image">
+    <h1 class="profile-name">𝔸𝔸ℝ𝕆ℕ 𝕁𝔸𝕐</h1>
+<div style="text-align: center;">
         <p>𝐅𝐫𝐨𝐦 𝐂𝐚𝐧𝐚𝐝𝐚 𝐬𝐩𝐢𝐧𝐧𝐢𝐧𝐠 𝐬𝐥𝐨𝐭𝐬 𝐚𝐧𝐝 𝐩𝐥𝐚𝐲𝐢𝐧𝐠 𝐠𝐚𝐦𝐞𝐬 - 𝐋𝐞𝐭'𝐬 𝐏𝐫𝐢𝐧𝐭!</p>
         <p>𝗕𝘂𝘀𝗶𝗻𝗲𝘀𝘀 𝗜𝗻𝗾𝘂𝗶𝗿𝗶𝗲𝘀: 𝗮𝗮𝗿𝗼𝗻𝗷𝗮𝘆𝘀𝗽𝗶𝗻𝘇@𝗴𝗺𝗮𝗶𝗹｡𝗰𝗼𝗺</p>
 
@@ -97,13 +137,121 @@
             </a>
         </div>
 
-	<!-- Giveaway Stats Section -->
-        <div class="giveaway-container">
-            <div class="giveaway-title">
-                Aaron Jay has been Giving Away some Prizes for his Community!
-            </div>
-            <div>
-                <span class="giveaway-amount">🎁 Total Prizes Given: $1043.63</span>
+<style>
+    /* Giveaway Container Styling */
+    .giveaway-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 15px;
+        border-radius: 15px;
+        background: linear-gradient(45deg, #FFD700, #FF4500, #FFD700);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        animation: border-glow 1.5s infinite alternate;
+        text-align: center;
+        color: white;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+    }
+
+    /* Border Animation */
+    @keyframes border-glow {
+        0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        100% { box-shadow: 0 0 25px rgba(255, 140, 0, 0.9); }
+    }
+
+    /* Title Styling */
+    .giveaway-title {
+        font-size: 24px;
+        font-weight: bold;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        opacity: 0;
+        animation: fade-in 1.5s ease-in-out forwards;
+    }
+
+    /* Text Fade-in Effect */
+    @keyframes fade-in {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Prize Amount Styling */
+    .giveaway-amount {
+        display: block;
+        font-size: 22px;
+        font-weight: bold;
+        color: #FFD700;
+        margin-top: 10px;
+    }
+
+    /* Black Text Border for "Total Prizes Given:" */
+    .prize-text {
+        text-shadow: 
+            -2px -2px 0 black,  
+             2px -2px 0 black,  
+            -2px  2px 0 black,  
+             2px  2px 0 black;
+    }
+
+    /* Animated Prize Display ($ + Number Together) */
+    .animated-prize {
+        display: inline-block;
+        font-size: 26px;
+        font-weight: bold;
+        color: #FF4500;
+        text-shadow: 2px 2px 10px rgba(255, 140, 0, 0.9);
+        animation: pulse 1.5s infinite alternate;
+    }
+
+    /* Pulse Animation */
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        100% { transform: scale(1.1); }
+    }
+</style>
+
+<!-- Giveaway Stats Section -->
+<div class="giveaway-container">
+    <div class="giveaway-title">
+        Aaron Jay has been Giving Away some Prizes for his Community!
+    </div>
+    <div>
+        <span class="giveaway-amount">
+            🎁 <span class="prize-text">Total Prizes Given:</span> 
+            <span id="prize-display" class="animated-prize">$0.00</span>
+        </span>
+    </div>
+</div>
+
+<script>
+    // Number Count Animation Effect
+    function animateNumber(elementId, start, end, duration) {
+        let obj = document.getElementById(elementId);
+        let range = end - start;
+        let startTime = null;
+        
+        function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            let progress = timestamp - startTime;
+            let current = Math.min(start + (range * (progress / duration)), end);
+            obj.innerText = `$${current.toFixed(2)}`;
+            if (progress < duration) {
+                requestAnimationFrame(step);
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    // Start the animation when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        animateNumber("prize-display", 0, 1043.63, 2000);
+    });
+</script>
+
+
+
+
     </div>
 </div>
 
