@@ -20,3 +20,19 @@
 .fixed-buttons a:hover {
     transform: scale(1.1); /* Slightly increase text size on hover */
 }
+
+/* Home Button Profile Image */
+.home-button-image {
+    width: 50px; /* Smaller size for home button */
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid #FFD700; /* Yellow Outline */
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Rotate Effect on Hover (Only for Home Button) */
+.home-button-image:hover {
+    transform: rotate(360deg);
+}
+
