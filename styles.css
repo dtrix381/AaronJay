@@ -1,8 +1,14 @@
 .fixed-buttons {
     position: fixed;
-    top: 10px;  /* Keep at the top */
-    left: 10px;  /* Keep on the left */
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the left */
+    gap: 10px; /* Space between the elements */
+    z-index: 1000; /* Keep it on top */
 }
+
 
 .fixed-buttons a {
     display: block;
@@ -35,4 +41,3 @@
 .home-button-image:hover {
     transform: rotate(360deg);
 }
-
