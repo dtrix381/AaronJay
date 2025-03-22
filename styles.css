@@ -132,7 +132,9 @@
 /* ✅ Responsive Background GIF */
 body {
     background: url('your-gif.gif') no-repeat center center fixed;
-    background-size: cover;  /* Scales the GIF to cover the screen */
+    background-size: cover; /* Ensures full coverage */
+    background-attachment: fixed;
+    background-position: center;
 }
 
 /* 📌 RESPONSIVE STYLES */
