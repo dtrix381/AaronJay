@@ -33,7 +33,7 @@
     padding: 3px 6px; /* Add more padding for a bigger button */
     border-radius: 6px; /* Rounded corners */
     transition: all 0.4s ease-in-out; /* Smooth transitions */
-    font-size: 18px; /* Bigger text */
+    font-size: 12px; /* Bigger text */
     text-transform: uppercase; /* All caps for a bold statement */
     letter-spacing: 1.2px; /* Spacing out letters for a clean look */
 }
