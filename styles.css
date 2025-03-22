@@ -131,7 +131,7 @@
 
 /* ✅ Responsive Background GIF */
 body {
-    background: url('your-gif.gif') no-repeat center center fixed;
+    background: url('casino-background') no-repeat center center fixed;
     background-size: cover; /* Ensures full coverage */
     background-attachment: fixed;
     background-position: center;
@@ -166,9 +166,8 @@ body {
     }
 
     body {
-        background-size: contain; /* Ensures full artwork is visible */
-        background-attachment: scroll; /* Prevents scrolling issues */
-        background-position: center top; /* Adjusts for better visibility */
+        background-size: contain;  /* Ensures the whole GIF is shown */
+        background-attachment: scroll; /* Prevents cut-off issues */
     }
 }
 
