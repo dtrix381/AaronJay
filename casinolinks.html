@@ -361,11 +361,14 @@
         let totalBalance = deposit + totalBonus;
         let totalWager = totalBalance * wageringReq;
 
-        document.getElementById("totalBonus").textContent = totalBonus.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        document.getElementById("totalBalance").textContent = totalBalance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        document.getElementById("totalWager").textContent = totalWager.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        let formatCurrency = (amount) => `$` + amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        document.getElementById("totalBonus").textContent = formatCurrency(totalBonus);
+        document.getElementById("totalBalance").textContent = formatCurrency(totalBalance);
+        document.getElementById("totalWager").textContent = formatCurrency(totalWager);
     }
 </script>
+
 
 </body>
 <footer>
