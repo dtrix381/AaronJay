@@ -146,6 +146,20 @@
             color: black;
             box-shadow: 0 0 15px #FFD700;
         }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+	.calculator-container {
+            max-width: 400px;
+            margin: auto;
+        }
+        input{
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+        }
     </style>
 </head>
 <body class="casinolinks-page">
@@ -276,6 +290,82 @@
         <a href="https://arcticbets.com/en/profile/bonus/bonus" class="button-redeem" target="_blank" rel="noopener noreferrer">REDEEM BONUS</a>
 </div>
 </div>
+<!-- Animated Calculator Box -->
+<div class="calculator-box">
+    <h2>Bonus Deposit & Wagering Calculator</h2>
+    <div class="calculator-container">
+        <label for="deposit">Deposit Amount:</label>
+        <input type="number" id="deposit" placeholder="Enter deposit amount" oninput="calculate()">
+
+        <label for="bonus">Bonus Percentage:</label>
+        <input type="number" id="bonus" placeholder="Enter bonus %" oninput="calculate()">
+
+        <label for="wagering">Wagering Requirement (x):</label>
+        <input type="number" id="wagering" placeholder="Enter wagering x" oninput="calculate()">
+
+        <h3>Results:</h3>
+        <p><strong>Total Bonus:</strong> <span id="totalBonus">0</span></p>
+        <p><strong>Total Balance:</strong> <span id="totalBalance">0</span></p>
+        <p><strong>Wagering Needed:</strong> <span id="totalWager">0</span></p>
+    </div>
+</div>
+
+<style>
+    .calculator-box {
+        position: relative;
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: rgba(34, 34, 34, 0.95);
+        box-shadow: 0 0 15px var(--arctic-blue);
+        border: 3px solid var(--arctic-blue);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .calculator-box:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px var(--arctic-blue);
+    }
+
+    .calculator-container {
+        text-align: center;
+        color: white;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        font-size: 18px;
+        text-align: center;
+        border: 2px solid var(--arctic-blue);
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        box-shadow: 0 0 10px var(--arctic-blue);
+    }
+
+    p {
+        font-size: 18px;
+    }
+</style>
+
+<script>
+    function calculate() {
+        let deposit = parseFloat(document.getElementById("deposit").value) || 0;
+        let bonusPercent = parseFloat(document.getElementById("bonus").value) || 0;
+        let wageringReq = parseFloat(document.getElementById("wagering").value) || 0;
+
+        let totalBonus = (deposit * bonusPercent) / 100;
+        let totalBalance = deposit + totalBonus;
+        let totalWager = totalBalance * wageringReq;
+
+        document.getElementById("totalBonus").textContent = totalBonus.toFixed(2);
+        document.getElementById("totalBalance").textContent = totalBalance.toFixed(2);
+        document.getElementById("totalWager").textContent = totalWager.toFixed(2);
+    }
+</script>
 
 </body>
 <footer>
