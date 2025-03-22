@@ -15,8 +15,8 @@
 /* Fixed buttons container */
 .fixed-buttons {
     position: fixed;
-    top: 80px; /* Adjusted to place buttons below the Home link */
-    left: 15px;
+    top: 30px; /* Adjusted to place buttons below the Home link */
+    left: 0.5px;
     display: flex;
     flex-direction: column;
     gap: 20px; /* Increase space between buttons */
@@ -30,8 +30,8 @@
     font-weight: bold;
     color: #fff;
     background: linear-gradient(135deg, #ff6b6b, #f3a683); /* Gradient background for buttons */
-    padding: 12px 25px; /* Add more padding for a bigger button */
-    border-radius: 25px; /* Rounded corners */
+    padding: 3px 6px; /* Add more padding for a bigger button */
+    border-radius: 6px; /* Rounded corners */
     transition: all 0.4s ease-in-out; /* Smooth transitions */
     font-size: 18px; /* Bigger text */
     text-transform: uppercase; /* All caps for a bold statement */
