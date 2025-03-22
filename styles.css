@@ -15,27 +15,33 @@
 /* ✅ Fixed Buttons Container (Flexbox) */
 .fixed-buttons {
     position: fixed;
-    top: 50px; /* Adjusted for better spacing */
+    top:60px;
     left: 10px;
-    display: flex;
+    display: none; /* Hidden by default */
     flex-direction: column;
-    gap: 15px;
-    z-index: 999;
-    padding-left: 10px;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.8); /* Dark background for dropdown */
+    padding: 10px;
+    border-radius: 1px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ✅ Button Styling */
+/* ✅ Show menu when active */
+.fixed-buttons.show {
+    display: flex;
+}
+
+/* ✅ Adjust button styling */
 .fixed-buttons a {
+    display: block;
     text-decoration: none;
     font-weight: bold;
     color: #fff;
     background: linear-gradient(135deg, #ff6b6b, #f3a683);
     padding: 10px 15px;
     border-radius: 6px;
-    transition: all 0.4s ease-in-out;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
 }
 
 /* ✅ Hover Effect */
@@ -189,3 +195,79 @@ body, html {
         padding: 6px 12px;
     }
 }
+
+/* Hide fixed-buttons by default on small screens */
+@media (max-width: 768px) {
+    .fixed-buttons {
+        display: none; /* Hidden by default */
+        position: fixed;
+        top: 50px;
+        left: 10px;
+        background: rgba(0, 0, 0, 0.9); /* Dark background */
+        padding: 10px;
+        border-radius: 8px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    /* Show fixed-buttons when active */
+    .fixed-buttons.show {
+        display: flex;
+    }
+}
+
+/* Toggle button for mobile/tablets */
+.toggle-button {
+    display: none; /* Hide on larger screens */
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    background: linear-gradient(135deg, #ff6b6b, #f3a683);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+    font-size: 1rem;
+    transition: all 0.3s ease-in-out;
+    text-transform: uppercase;
+}
+
+/* Show toggle button only on smaller screens */
+@media (max-width: 768px) {
+    .toggle-button {
+        display: block;
+    }
+}
+
+/* Hover effect for toggle button */
+.toggle-button:hover {
+    background: #f3a683;
+}
+
+#toggleMenu {
+    position: fixed;
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 1001; /* Ensures it stays on top */
+}
+
+/* ✅ Responsive Adjustments */
+@media (max-width: 768px) {
+    #toggleMenu {
+        top: 5px;
+        left: 5px;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+}
+
