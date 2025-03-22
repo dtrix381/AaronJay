@@ -295,22 +295,27 @@
     <h2>Bonus Deposit & Wagering Calculator</h2>
     <div class="calculator-container">
         <label for="deposit">Deposit Amount:</label>
-        <input type="number" id="deposit" placeholder="Enter deposit amount" oninput="calculate()">
+        <input type="text" id="deposit" placeholder="Enter deposit amount" oninput="formatDeposit()" onblur="validateDeposit()">
 
         <label for="bonus">Bonus Percentage:</label>
-        <input type="number" id="bonus" placeholder="Enter bonus %" oninput="calculate()">
+        <input type="text" id="bonus" placeholder="Enter bonus %" oninput="formatBonus()" onblur="validateBonus()">
 
         <label for="wagering">Wagering Requirement (x):</label>
         <input type="number" id="wagering" placeholder="Enter wagering x" oninput="calculate()">
 
         <h3>Results:</h3>
-        <p><strong>Total Bonus:</strong> <span id="totalBonus">0</span></p>
-        <p><strong>Total Balance:</strong> <span id="totalBalance">0</span></p>
-        <p><strong>Wagering Needed:</strong> <span id="totalWager">0</span></p>
+        <p><strong>Total Bonus:</strong> <span id="totalBonus">$0.00</span></p>
+        <p><strong>Total Balance:</strong> <span id="totalBalance">$0.00</span></p>
+        <p><strong>Wagering Needed:</strong> <span id="totalWager" class="highlight-result">$0.00</span></p>
     </div>
 </div>
 
 <style>
+    :root {
+        --arctic-blue: #00e1ff;
+        --highlight-color: #ffcc00;
+    }
+
     .calculator-box {
         position: relative;
         max-width: 400px;
@@ -349,12 +354,18 @@
     p {
         font-size: 18px;
     }
+
+    .highlight-result {
+        color: var(--highlight-color);
+        font-weight: bold;
+        font-size: 20px;
+    }
 </style>
 
 <script>
     function calculate() {
-        let deposit = parseFloat(document.getElementById("deposit").value) || 0;
-        let bonusPercent = parseFloat(document.getElementById("bonus").value) || 0;
+        let deposit = parseFloat(document.getElementById("deposit").value.replace(/[^0-9.]/g, '')) || 0;
+        let bonusPercent = parseFloat(document.getElementById("bonus").value.replace(/[^0-9.]/g, '')) || 0;
         let wageringReq = parseFloat(document.getElementById("wagering").value) || 0;
 
         let totalBonus = (deposit * bonusPercent) / 100;
@@ -367,7 +378,40 @@
         document.getElementById("totalBalance").textContent = formatCurrency(totalBalance);
         document.getElementById("totalWager").textContent = formatCurrency(totalWager);
     }
+
+    function formatDeposit() {
+        let depositInput = document.getElementById("deposit");
+        let value = depositInput.value.replace(/[^0-9.]/g, '');  // Remove non-numeric characters except "."
+
+        if (value) {
+            depositInput.value = `$` + value;
+        }
+        calculate();
+    }
+
+    function validateDeposit() {
+        let depositInput = document.getElementById("deposit");
+        let value = depositInput.value.replace(/[^0-9.]/g, '');
+        depositInput.value = value ? `$` + parseFloat(value).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "";
+    }
+
+    function formatBonus() {
+        let bonusInput = document.getElementById("bonus");
+        let value = bonusInput.value.replace(/[^0-9.]/g, '');
+
+        if (value) {
+            bonusInput.value = value + `%`;
+        }
+        calculate();
+    }
+
+    function validateBonus() {
+        let bonusInput = document.getElementById("bonus");
+        let value = bonusInput.value.replace(/[^0-9.]/g, '');
+        bonusInput.value = value ? value + `%` : "";
+    }
 </script>
+
 
 
 </body>
