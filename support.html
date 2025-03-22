@@ -11,22 +11,25 @@
         body {
             background: url('casino-background.gif') no-repeat center center fixed;
             background-size: cover;
-            color: white;
+            height: 100%;
+    	    margin: 0;
+    	    display: flex;
+    	    flex-direction: column;
+	    color: white;
             font-family: Arial, sans-serif;
             text-align: center;
             padding-top: 50px;
         }
-
-        /* Support Container */
         .support-container {
-            margin: auto;
-            max-width: 600px;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: rgba(34, 34, 34, 0.9); /* Semi-transparent dark */
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
-            text-align: center;
-        }
+   	    margin: auto;
+    	    max-width: 600px;
+    	    padding: 20px;
+    	    border-radius: 10px;
+    	    background-color: rgba(34, 34, 34, 0.9);
+    	    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    	    text-align: center;
+	    flex-grow: 1; /
+   	}
 
         h2 {
             color: #FFD700;
@@ -88,8 +91,8 @@
 
         .home-button:hover {
             background-color: #FFD700;
-        }
-
+        
+	}
     </style>
 </head>
 <body>
@@ -142,6 +145,6 @@
 
         <a href="index.html" class="home-button">🏠 Back to Home</a>
     </div>
-
 </body>
+
 </html>
