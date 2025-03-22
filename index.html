@@ -73,12 +73,21 @@
     </style>
 </head>
 <body>
-<div class="fixed-buttons">
-    <a href="index.html">𝗛𝗼𝗺𝗲</a>
+<button id="toggleMenu">☰ Menu</button>
+
+<div class="fixed-buttons" id="menu">
     <a href="deposit-event.html">𝗔𝗿𝗰𝘁𝗶𝗰𝗯𝗲𝘁𝘀 𝗗𝗲𝗽𝗼𝘀𝗶𝘁 𝗘𝘃𝗲𝗻𝘁𝘀</a>
     <a href="casinolinks.html">𝗖𝗮𝘀𝗶𝗻𝗼 𝗟𝗶𝗻𝗸𝘀</a>
     <a href="support.html">𝗖𝗼𝗻𝘁𝗮𝗰𝘁 𝗦𝘂𝗽𝗽𝗼𝗿𝘁</a>
 </div>
+
+<script>
+document.getElementById("toggleMenu").addEventListener("click", function () {
+    var menu = document.querySelector(".fixed-buttons");
+    menu.classList.toggle("show"); // Toggle visibility
+});
+</script>
+
     <style>
     /* Centered Container */
     .container {
