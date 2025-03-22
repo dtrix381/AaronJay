@@ -1,83 +1,72 @@
-/* Home Link Style */
+/* ✅ Home Link Style */
 .home-link {
-    font-size: 20px;
+    font-size: 1.5rem;
     color: #FFD700; /* Gold color */
     font-weight: bold;
     display: inline-block;
-    margin-left: 10px; /* Space between the avatar and the text */
+    margin-left: 10px;
     position: fixed;
-    top: 15px; /* Align to the very top */
-    left: 15px; /* Align to the left */
-    z-index: 1000; /* Keep it above other content */
-    transition: transform 0.3s ease-in-out; /* Smooth transitions */
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+    transition: transform 0.3s ease-in-out;
 }
 
-/* Fixed buttons container */
+/* ✅ Fixed Buttons Container (Flexbox) */
 .fixed-buttons {
     position: fixed;
-    top: 30px; /* Adjusted to place buttons below the Home link */
-    left: 0.5px;
+    top: 50px; /* Adjusted for better spacing */
+    left: 10px;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Increase space between buttons */
-    z-index: 999; /* Ensure buttons are below the Home link */
-    padding-left: 20px; /* Align buttons */
+    gap: 15px;
+    z-index: 999;
+    padding-left: 10px;
 }
 
-/* Style for buttons in .fixed-buttons */
+/* ✅ Button Styling */
 .fixed-buttons a {
     text-decoration: none;
     font-weight: bold;
     color: #fff;
-    background: linear-gradient(135deg, #ff6b6b, #f3a683); /* Gradient background for buttons */
-    padding: 3px 6px; /* Add more padding for a bigger button */
-    border-radius: 6px; /* Rounded corners */
-    transition: all 0.4s ease-in-out; /* Smooth transitions */
-    font-size: 12px; /* Bigger text */
-    text-transform: uppercase; /* All caps for a bold statement */
-    letter-spacing: 1.2px; /* Spacing out letters for a clean look */
+    background: linear-gradient(135deg, #ff6b6b, #f3a683);
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: all 0.4s ease-in-out;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
 }
 
-/* Hover effect for the buttons */
+/* ✅ Hover Effect */
 .fixed-buttons a:hover {
-    transform: scale(1.05); /* Slightly enlarge on hover */
-    background: linear-gradient(135deg, #f3a683, #ff6b6b); /* Inverted gradient on hover */
-    box-shadow: 0 4px 30px rgba(255, 99, 71, 0.7); /* Glowing shadow effect */
-    color: #fff; /* Ensure text remains visible */
-    letter-spacing: 1.5px; /* Further increase letter-spacing on hover */
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #f3a683, #ff6b6b);
+    box-shadow: 0 4px 30px rgba(255, 99, 71, 0.7);
+    letter-spacing: 1.5px;
 }
 
-/* Active state for buttons (when clicked) */
+/* ✅ Active State */
 .fixed-buttons a:active {
-    transform: scale(0.98); /* Slightly shrink when clicked */
-    background: #f39c12; /* Change to a golden color */
-    box-shadow: none; /* No shadow on active */
+    transform: scale(0.98);
+    background: #f39c12;
+    box-shadow: none;
 }
 
-/* Optional: Adjust page text alignment for consistency */
-body .fixed-buttons {
-    text-align: left; /* Keep the text aligned to the left */
-}
-
-/* Smooth transition for the fixed buttons container */
-.fixed-buttons {
-    transition: all 0.3s ease-in-out;
-}
-
-
-
-/* ✅ Casino Container (Flashing Outer Border Effect) */
+/* ✅ Responsive Casino Container */
 .casino-container {
     position: relative;
     margin: auto;
+    width: 90%;
     max-width: 600px;
     padding: 20px;
     border-radius: 10px;
     background-color: rgba(34, 34, 34, 0.9);
     box-shadow: 0 0 20px rgba(0, 174, 239, 0.8);
+    text-align: center;
 }
 
-/* ✅ Thick and Fully Visible Outer Flashing Border */
+/* ✅ Flashing Border */
 .casino-container::before {
     content: "";
     position: absolute;
@@ -93,20 +82,22 @@ body .fixed-buttons {
     z-index: -1;
 }
 
+/* ✅ Responsive Casino Logo */
 .casino-logo {
-    max-width: 600px;  /* Adjust this value to make the logo bigger */
-    height: 300x;  /* Maintain aspect ratio */
+    width: 100%;
+    max-width: 300px; /* Makes the logo larger on big screens */
+    height: auto; /* Ensures the aspect ratio remains correct */
     margin: 20px 0;
 }
 
-/* 🔥 Faster & More Intense Flashing Effect */
+/* ✅ Faster Flashing Effect */
 @keyframes border-flush {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* ✅ Highlighted "Use the Code: aaron" */
+/* ✅ Highlighted Code Box */
 .code-box {
     display: inline-block;
     padding: 8px 15px;
@@ -114,21 +105,87 @@ body .fixed-buttons {
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid #FFD700;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 1.2rem;
 }
 
 .code-box .highlight {
     color: #FFD700;
-    font-size: 22px;
+    font-size: 1.4rem;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
 }
 
+/* ✅ Removing Border on Certain Elements */
 .no-border .casino-container {
     border: none;
     box-shadow: none;
 }
 
+/* ✅ Full Page Reset */
 body, html {
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* 📌 RESPONSIVE STYLES */
+
+/* ✅ Tablet (768px and below) */
+@media (max-width: 768px) {
+    .home-link {
+        font-size: 1.3rem;
+        top: 10px;
+        left: 10px;
+    }
+
+    .fixed-buttons {
+        top: 40px;
+        gap: 10px;
+    }
+
+    .casino-container {
+        padding: 15px;
+        width: 95%;
+    }
+
+    .casino-logo {
+        max-width: 250px;
+    }
+
+    .code-box {
+        font-size: 1rem;
+    }
+}
+
+/* ✅ Mobile (480px and below) */
+@media (max-width: 480px) {
+    .home-link {
+        font-size: 1.1rem;
+        top: 5px;
+        left: 5px;
+    }
+
+    .fixed-buttons {
+        top: 35px;
+        left: 5px;
+        gap: 8px;
+    }
+
+    .fixed-buttons a {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    .casino-container {
+        padding: 10px;
+        width: 98%;
+    }
+
+    .casino-logo {
+        max-width: 200px;
+    }
+
+    .code-box {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
 }
