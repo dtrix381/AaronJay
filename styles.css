@@ -17,13 +17,14 @@
     position: fixed;
     top:60px;
     left: 10px;
-    display: none; /* Hidden by default */
+    display: flex; /* Hidden by default */
     flex-direction: column;
     gap: 5px;
     background: rgba(0, 0, 0, 0.8); /* Dark background for dropdown */
     padding: 10px;
     border-radius: 1px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
 }
 
 /* ✅ Show menu when active */
@@ -225,7 +226,7 @@ body, html {
     background: linear-gradient(135deg, #ff6b6b, #f3a683);
     color: white;
     padding: 10px 15px;
-    border-radius: 6px;
+    border-radius: 3px;
     font-weight: bold;
     cursor: pointer;
     z-index: 1001;
@@ -256,7 +257,7 @@ body, html {
     padding: 10px 15px;
     font-size: 1rem;
     font-weight: bold;
-    border-radius: 6px;
+    border-radius: 3px;
     cursor: pointer;
     z-index: 1001; /* Ensures it stays on top */
 }
@@ -270,4 +271,23 @@ body, html {
         font-size: 0.9rem;
     }
 }
+
+.menu-button {
+        background-color: #ff6b6b;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 9999; /* Ensure it's on top */
+    }
+
+.menu-button:hover {
+        background-color: #ff6b6b;
+    }
 
