@@ -44,19 +44,33 @@
     </style>
 </head>
 <body>
-<button id="toggleMenu">☰ Menu</button>
+<button id="menu-toggle" class="menu-button">Hide Menu</button>
 
-<div class="fixed-buttons" id="menu">
+<div class="fixed-buttons">
     <a href="index.html">𝗛𝗼𝗺𝗲</a>
     <a href="casinolinks.html">𝗖𝗮𝘀𝗶𝗻𝗼 𝗟𝗶𝗻𝗸𝘀</a>
     <a href="support.html">𝗖𝗼𝗻𝘁𝗮𝗰𝘁 𝗦𝘂𝗽𝗽𝗼𝗿𝘁</a>
 </div>
 
 <script>
-document.getElementById("toggleMenu").addEventListener("click", function () {
-    var menu = document.querySelector(".fixed-buttons");
-    menu.classList.toggle("show"); // Toggle visibility
-});
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuButton = document.getElementById("menu-toggle");
+        const menu = document.querySelector(".fixed-buttons");
+
+        // Ensure the menu is always visible at the start
+        menu.style.display = "block";
+        menuButton.textContent = "Hide Menu"; // Default button text
+
+        menuButton.addEventListener("click", function () {
+            if (menu.style.display === "none") {
+                menu.style.display = "block";
+                menuButton.textContent = "☰ Hide Menu";
+            } else {
+                menu.style.display = "none";
+                menuButton.textContent = "☰ Show Menu";
+            }
+        });
+    });
 </script>
 
 
