@@ -129,11 +129,10 @@
     box-shadow: none;
 }
 
-/* ✅ Full Page Reset */
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
+/* ✅ Responsive Background GIF */
+body {
+    background: url('your-gif.gif') no-repeat center center fixed;
+    background-size: cover;  /* Scales the GIF to cover the screen */
 }
 
 /* 📌 RESPONSIVE STYLES */
@@ -162,6 +161,12 @@ body, html {
 
     .code-box {
         font-size: 1rem;
+    }
+
+    body {
+        background-size: contain; /* Ensures full artwork is visible */
+        background-attachment: scroll; /* Prevents scrolling issues */
+        background-position: center top; /* Adjusts for better visibility */
     }
 }
 
