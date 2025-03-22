@@ -132,8 +132,7 @@
 /* ✅ Responsive Background GIF */
 body {
     background: url('casino-background') no-repeat center center fixed;
-    background-size: 100% auto; /* Fit width, keep aspect ratio */
-    background-attachment: fixed;
+    background-size: cover;
 }
 
 /* 📌 RESPONSIVE STYLES */
