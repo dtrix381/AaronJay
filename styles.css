@@ -298,3 +298,56 @@ body {
         background-color: #ff6b6b;
     }
 
+.container {
+    width: 90%; /* Adjust width to fit content */
+    max-width: 800px; /* Prevent it from being too wide */
+    margin: 0 auto; /* Centers the container */
+    padding: 20px;
+}
+
+.toc {
+    list-style-type: none; /* Removes default bullets */
+    padding: 0;
+    margin-left: 0; /* Ensures list starts from the left */
+    text-align: left; /* Forces left alignment */
+}
+
+.toc li {
+    margin-bottom: 10px; /* Adds spacing between list items */
+}
+
+.toc a {
+    text-decoration: none; /* Removes underline */
+    color: #00AEEF; /* Adjust the color */
+    font-weight: bold;
+}
+
+.toc a:hover {
+    text-decoration: underline; /* Adds underline effect on hover */
+}
+
+.logo-link {
+    position: fixed; /* Keeps it in place */
+    top: 10px;
+    left: 10px;
+    z-index: 1000; /* Ensures it stays above other content */
+}
+
+.logo {
+    width: 20px;  /* Small size */
+    height: 20px; /* Keeps it a perfect circle */
+    border-radius: 50%;
+    border: 2px solid #FFD700; /* Gold outline */
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.8);
+    object-fit: cover; /* Ensures image fits */
+}
+
+
+.logo:hover {
+    transform: rotate(360deg);
+    }
+
+
+
+
+
