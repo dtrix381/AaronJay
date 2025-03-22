@@ -165,8 +165,9 @@ body {
     }
 
     body {
-        background-size: contain;  /* Ensures the whole GIF is shown */
-        background-attachment: scroll; /* Prevents cut-off issues */
+        background-position: left center; /* Moves the GIF to the left */
+        background-size: contain; /* Ensures the whole animation is visible */
+        background-attachment: scroll; /* Prevents cropping issues */
     }
 }
 
