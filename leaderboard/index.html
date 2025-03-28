@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    		<title>Aaron Jay</title>
+    		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    		<link rel="stylesheet" href="styles.css"> <!-- Link to your global styles -->
+	<style>
+       		body {
+	    		background: url('assets/casino-background.gif') no-repeat center center fixed;
+	   		background-size: cover;
+	    		background-color: black; /* Fallback color if the image doesn't load */
+	    		color: white;
+	    		height: 100%; /* Ensure full height */
+    			min-height: 100vh; /* Ensure full viewport height */
+			margin: 0;
+	    		padding: 0;
+	    		display: flex;
+    			flex-direction: column; /* Stack content from top to bottom */
+			min-height: 100vh;
+			overflow-x: hidden; /* Prevents any horizontal scrolling */
+		}
+	
+    		@media (max-width: 768px) { 
+    		body {
+        		background: url('assets/casino-background.gif') no-repeat;
+        		background-size: auto 100vh; /* Ensures full height */
+        		background-color: black; /* Fallback color */
+        		background-repeat: repeat-y; /* Enables vertical repeat */
+        		animation: backgroundLoop 15s linear infinite; /* Animation duration */
+    			flex-direction: column; /* Stack content from top to bottom */
+			overflow-x: hidden; /* Prevents any horizontal scrolling */
+		}
+		
+		html, body {
+    			height: 100%;
+    			margin: 0;
+    			padding: 0;
+    			display: flex;
+    			flex-direction: column;
+		}
+
+		/* Make main content fill the available space */
+		.main-content {
+    			flex: 1; /* This pushes the footer to the bottom */
+		}
+
+   	 	@keyframes backgroundLoop {
+        		0% { background-position: 100% center; }
+        		50% { background-position: 0% center; }
+        		100% { background-position: 100% center; } }
+		}
+		
+/* Wrapper to keep everything centered and prevent gaps */
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    min-height: 100vh; /* Ensures full height */
+    width: 100%;
+    padding-top: 0px; /* Adjust top padding instead of using negative margins */
+}
+
+/* Welcome Box - Keep it centered properly */
+.welcome-box {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 215, 0, 0.5);
+    max-width: 40%;
+    margin-bottom: 180px; /* Add spacing instead of negative margins */
+}
+
+/* Leaderboard Container */
+.leaderboard-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: flex-start; /* Ensures they align from the top */
+    width: 100%;
+}
+
+/* Leaderboard Box */
+.leaderboard-box {
+    width: 320px;
+    padding: 20px;
+    background: linear-gradient(145deg, #1a1a1a, #222);
+    color: white;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    overflow: hidden;
+    margin-top: -120px;
+}
+
+
+		.leaderboard-box::before {
+	    		content: "";
+	    		position: absolute;
+	    		top: -2px;
+	    		left: -2px;
+	    		right: -2px;
+	    		bottom: -2px;
+	    		background: linear-gradient(90deg, #FFD700, #ff6600, #FFD700);
+	    		z-index: -1;
+	    		border-radius: 15px;
+	    		filter: blur(5px);
+		}
+        	.leaderboard-box h3 {
+	    		color: #FFD700; /* Gold */
+	    		font-size: 24px;
+	    		margin-bottom: 20px;
+	    		text-shadow: 0 0 10px #FFD700, 0 0 20px #ff6600;
+	    		nimation: glow-pulse 1.5s infinite alternate;
+		}
+		@keyframes glow-pulse {
+			0% { text-shadow: 0 0 10px #FFD700, 0 0 20px #ff6600; }
+	    		100% { text-shadow: 0 0 15px #FFD700, 0 0 25px #ff6600; }
+		}
+
+
+        	.leaderboard-box p {
+            		font-size: 16px;
+            		margin-bottom: 10px;
+        	}
+
+        	.leaderboard-box a {
+	    		color: #22caec;
+	    		text-decoration: none;
+	    		font-weight: bold;
+	    		font-size: 16px;
+	    		transition: all 0.3s ease-in-out;
+		}
+
+        	.leaderboard-box a:hover {
+	    		text-shadow: 0 0 10px #FFD700, 0 0 15px #ff6600;
+	    		transform: scale(1.1);
+		}
+		h2 {
+            		color: #FFD700;
+            		font-size: 24px;
+            		margin-bottom: 10px;
+        	}
+        	p {
+            		font-size: 16px;
+            		line-height: 1.4;
+        	}
+
+
+		/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .content-wrapper {
+        padding: 1px; /* Reduce padding on smaller screens */
+    }
+    
+    .welcome-box {
+        font-size: 7px; /* Adjust text size */
+        padding: 10px;
+    	margin-top: 850px; /* Add spacing instead of negative margins */
+	max-width: 80%;
+}
+
+    .leaderboard-container {
+        flex-direction: column; /* Stack items on mobile */
+        align-items: center;
+    }
+
+    .leaderboard-box {
+        width: 80%; /* Full width on mobile */
+        max-width: 350px; /* Prevents it from being too wide */
+    }
+}
+	</style>
+
+</head>
+
+<body>
+	<div class="main-content">
+	
+<!-- Marquee Box -->
+	<div class="marquee-container">
+    	<div class="marquee-content" id="marqueeText"></div>
+	</div>
+
+
+	<script>
+    		const socialLinks = `
+        		<a href="https://kick.com/aaron_jay" target="_blank">
+            		<img src="assets/Kick2.png" alt="Kick" width="20">Watch Live on Kick
+        		</a> |
+        		<a href="https://discord.gg/zj8rQeBHvm" target="_blank">
+            		<img src="assets/Discord2.png" class="icon">Join Discord Community 
+        		</a> |
+        		<a href="https://x.com/AaronJaySpinz" target="_blank">
+            		<img src="assets/Twitter2.png" class="icon">Follow me on Twitter
+        		</a> |
+        		<a href="https://www.youtube.com/@Aaronjayspinz" target="_blank">
+            		<img src="assets/YouTube2.png" class="icon">Subscribe on YouTube
+        		</a>
+    			`;
+
+    		const cryptoTemplate = (btc, eth, sol, ltc) => `
+        		<img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="icon"> BTC: $${btc} |
+        		<img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="icon"> ETH: $${eth} |
+        		<img src="https://cryptologos.cc/logos/solana-sol-logo.png" class="icon"> SOL: $${sol} |
+        		<img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png" class="icon"> LTC: $${ltc}
+    			`;
+
+    		let currentBatch = "social"; // Track which batch is showing
+
+    		// Function to fetch cryptocurrency prices
+    		async function fetchCryptoPrices() {
+        		try {
+            		let response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,litecoin&vs_currencies=usd');
+            		let data = await response.json();
+
+            	return cryptoTemplate(
+                	data.bitcoin.usd.toLocaleString(),
+                	data.ethereum.usd.toLocaleString(),
+                	data.solana.usd.toLocaleString(),
+                	data.litecoin.usd.toLocaleString()
+            		);
+       		} catch (error) {
+            		console.error("Error fetching crypto prices:", error);
+            		return "Error loading prices...";
+        		}
+    		}
+
+    	
+		// Function to update the marquee content
+    			async function updateMarquee() {
+        		const marquee = document.getElementById("marqueeText");
+
+        	if (currentBatch === "social") {
+            		marquee.innerHTML = socialLinks;
+            		currentBatch = "crypto";
+        	} else {
+            		marquee.innerHTML = await fetchCryptoPrices();
+            		currentBatch = "social";
+        	}
+
+        		marquee.style.animation = "none"; // Reset animation
+        		void marquee.offsetWidth; // Trigger reflow
+        		marquee.style.animation = "marquee 20s linear infinite"; // Restart animation
+    		}
+
+    		// Start the scrolling process when the page loads
+    			window.addEventListener('load', () => {
+        		updateMarquee(); // Initial batch (social links)
+        
+        	// Loop through alternating batches
+        		setInterval(async () => {
+            		await updateMarquee(); // Wait for the current batch to finish
+        		}, 20000); // Adjust to match the time duration of the scroll (20 seconds)
+    			});
+	</script>
+
+<button id="menu-toggle" class="menu-button">Hide Menu</button>
+
+	<div class="fixed-buttons">
+    		<a href="index.html">𝗛𝗼𝗺𝗲</a>
+		<a href="deposit-event.html">𝗔𝗿𝗰𝘁𝗶𝗰𝗕𝗲𝘁𝘀 𝗗𝗲𝗽𝗼𝘀𝗶𝘁 𝗘𝘃𝗲𝗻𝘁𝘀</a>
+    		<a href="casinolinks.html">𝗖𝗮𝘀𝗶𝗻𝗼 𝗟𝗶𝗻𝗸𝘀</a>
+    		<a href="support.html">𝗖𝗼𝗻𝘁𝗮𝗰𝘁 𝗦𝘂𝗽𝗽𝗼𝗿𝘁</a>
+    		<a href="policy.html">𝗣𝗿𝗶𝘃𝗮𝗰𝘆 𝗣𝗼𝗹𝗶𝗰𝘆</a>
+	</div>
+
+	<script>
+    		document.addEventListener("DOMContentLoaded", function () {
+        	const menuButton = document.getElementById("menu-toggle");
+        	const menu = document.querySelector(".fixed-buttons");
+
+        	// Ensure the menu is always visible at the start
+        		menu.style.display = "block";
+        		menuButton.textContent = "Menu"; // Default button text
+
+        	menuButton.addEventListener("click", function () {
+            	if (menu.style.display === "none") {
+                	menu.style.display = "block";
+                	menuButton.textContent = "Hide ☰";
+            	} else {
+                	menu.style.display = "none";
+                	menuButton.textContent = "Show ☰";
+            	}
+        	});
+    		});
+	</script>
+
+
+
+</div>
+
+
+<div class="content-wrapper">
+    <div class="welcome-box">
+        <h2>🏆 Welcome to the Ultimate Leaderboard! 🏆</h2>
+        <p>Step into the action and see where you stand among the top players! Whether it's in-stream giveaways or high-stakes wager races, this is where the champions rise and claim their glory. Stay updated, compete, and climb the ranks to secure your place among the elite.</p>
+    </div>
+
+    <div class="leaderboard-container">
+        <!-- Wager Race Leaderboard -->
+        <div class="leaderboard-box">
+            <h3>𝕀𝕟-𝕤𝕥𝕣𝕖𝕒𝕞 ℙ𝕣𝕚𝕫𝕖𝕤 𝕃𝕖𝕒𝕕𝕖𝕣𝕓𝕠𝕒𝕣𝕕</h3>
+            <p>𝘓𝘦𝘢𝘥𝘦𝘳𝘣𝘰𝘢𝘳𝘥 𝘵𝘰 𝘤𝘩𝘦𝘤𝘬 𝘵𝘩𝘦 𝘛𝘰𝘱 𝘞𝘪𝘯𝘯𝘦𝘳𝘴 𝘥𝘶𝘳𝘪𝘯𝘨 𝘈𝘢𝘳𝘰𝘯 𝘑𝘢𝘺 𝘚𝘵𝘳𝘦𝘢𝘮</p>
+            <br>	
+       	    <p>𝗧𝗼𝘁𝗮𝗹 𝗥𝗮𝗻𝗱𝗼𝗺 𝗚𝗶𝘃𝗲𝗮𝘄𝗮𝘆 𝗛𝗼𝘀𝘁𝗲𝗱: <span style="color: gold;">𝟏𝟎</span></p>
+	    <p>𝐓𝐨𝐭𝐚𝐥 𝐈𝐧-𝐬𝐭𝐫𝐞𝐚𝐦 𝐏𝐫𝐢𝐳𝐞𝐬 𝐆𝐢𝐯𝐞𝐧: <span style="color: gold;">$𝟔𝟓.𝟎</span></p>
+            <br>	
+            <p><a href="leaderboard/instream-leaderboard.html">Click Here to view the In-stream Leaderboard</a></p>
+        </div>
+        
+        <!-- Best Slot Multipliers -->
+        <div class="leaderboard-box">
+            <h3>𝕎𝕒𝕘𝕖𝕣 ℝ𝕒𝕔𝕖 𝕃𝕖𝕒𝕕𝕖𝕣𝕓𝕠𝕒𝕣𝕕</h3>
+            <p>𝘓𝘦𝘢𝘥𝘦𝘳𝘣𝘰𝘢𝘳𝘥 𝘵𝘰 𝘤𝘩𝘦𝘤𝘬 𝘵𝘩𝘦 𝘛𝘰𝘱 𝘞𝘢𝘨𝘦𝘳𝘴 𝘢𝘯𝘥 𝘞𝘪𝘯𝘯𝘦𝘳𝘴</p>
+            <br>	
+       	    <p>𝐓𝐨𝐭𝐚𝐥 𝐖𝐚𝐠𝐞𝐫 𝐑𝐚𝐜𝐞'𝐬 𝐄𝐯𝐞𝐧𝐭: <span style="color: gold;">𝟐</span></p>
+	    <p>𝐓𝐨𝐭𝐚𝐥 𝐖𝐚𝐠𝐞𝐫 𝐏𝐫𝐢𝐳𝐞𝐬 𝐆𝐢𝐯𝐞𝐧: <span style="color: gold;">$𝟑𝟕𝟓.𝟎</span></p>
+            <br>	
+            <p><a href="leaderboard/wager-leaderboard.html">Click Here to view the Wager Race Leaderboard</a></p>
+        </div>
+        
+        <!-- Most Tipped Viewers -->
+        <div class="leaderboard-box">
+            <h3>𝕎𝕙𝕖𝕖𝕝 𝕎𝕚𝕟𝕟𝕖𝕣𝕤 𝕃𝕖𝕒𝕕𝕖𝕣𝕓𝕠𝕒𝕣𝕕</h3>
+            <p>𝘓𝘦𝘢𝘥𝘦𝘳𝘣𝘰𝘢𝘳𝘥 𝘵𝘰 𝘤𝘩𝘦𝘤𝘬 𝘵𝘩𝘦 𝘞𝘪𝘯𝘯𝘦𝘳𝘴 𝘰𝘧 𝘉𝘰𝘯𝘶𝘴 𝘉𝘶𝘺 𝘞𝘩𝘦𝘦𝘭</p>
+            <br>	
+       	    <p>𝐓𝐨𝐭𝐚𝐥 𝐁𝐨𝐧𝐮𝐬 𝐁𝐮𝐲 𝐇𝐨𝐬𝐭𝐞𝐝: <span style="color: gold;">𝟐𝟒</span></p>
+	    <p>𝐓𝐨𝐭𝐚𝐥 𝐖𝐡𝐞𝐞𝐥 𝐏𝐫𝐢𝐳𝐞𝐬 𝐆𝐢𝐯𝐞𝐧: <span style="color: gold;">$𝟔𝟎𝟖.𝟔𝟑</span></p>
+            <br>	
+            <p><a href="leaderboard/wheel-leaderboard.html">Click Here to view the Wheel Leaderboard</a></p>
+        </div>
+        
+        <!-- In-Stream Prizes Leaderboard -->
+        <div class="leaderboard-box">
+            <h3>𝕋𝕠𝕥𝕒𝕝 ℙ𝕣𝕚𝕫𝕖 𝕃𝕖𝕒𝕕𝕖𝕣𝕓𝕠𝕒𝕣𝕕</h3>
+            <p>𝘓𝘦𝘢𝘥𝘦𝘳𝘣𝘰𝘢𝘳𝘥 𝘵𝘰 𝘤𝘩𝘦𝘤𝘬 𝘩𝘰𝘸 𝘮𝘶𝘤𝘩 𝘵𝘩𝘦 𝘛𝘰𝘵𝘢𝘭 𝘗𝘳𝘪𝘻𝘦𝘴 𝘨𝘪𝘷𝘦𝘯 𝘵𝘰 𝘢𝘭𝘭 𝘝𝘪𝘦𝘸𝘦𝘳𝘴</p>
+            <br>	
+       	    <p>𝐓𝐨𝐭𝐚𝐥 𝐆𝐢𝐯𝐞𝐚𝐰𝐚𝐲 𝐇𝐨𝐬𝐭𝐞𝐝: <span style="color: gold;">𝟑𝟔</span></p>
+	    <p>𝗧𝗼𝘁𝗮𝗹 𝗣𝗿𝗶𝘇𝗲𝘀 𝗚𝗶𝘃𝗲𝗻: <span style="color: gold;">$𝟏𝟎𝟒𝟖.𝟔𝟑</span></p>
+            <br>	
+            <p><a href="leaderboard/totalprize-leaderboard.html">Click Here to view the Total Prize Leaderboard</a></p>
+        </div>
+    </div>
+</div>
+</body>
+
+<style>
+  footer {
+    	text-align: center;
+    	margin-top: 0;
+    	padding: 1px 0;
+    	background: rgba(34, 34, 34, 0.9);
+    	color: #fff;
+    	font-size: 10px; !important;
+    	border-top: 1px solid #00AEEF;
+    	white-space: nowrap;
+    	height: auto;
+    	position: relative;
+    	bottom: 0;
+    	left: -8%;
+    	width: 110vw; /* Full viewport width */
+    	min-width: 110%; /* Ensure no gaps */
+    }
+
+
+ footer a {
+    	color: #00AEEF;
+    	text-decoration: none;
+    }
+
+ footer a:hover {
+    	text-decoration: underline;
+    }
+
+ footer p {
+    	margin: 0 5px; /* Adds a small space between elements */
+    	margin-left: 10%;
+    }
+
+		/* ✅ Mobile-Friendly Footer */
+		@media (max-width: 768px) {
+    		footer {
+        		font-size: 12px; /* Adjust font size */
+        		padding: 5px 0; /* Reduce padding */
+        		text-align: center;
+        		white-space: normal; /* Allow text wrapping */
+        		width: 100%; /* Ensures it spans full width */
+        		min-width: 100%;
+        		position: relative;
+        		bottom: 0;
+        		left: 0; /* Remove offset */
+        		background: rgba(34, 34, 34, 0.95); /* Slightly darker for readability */
+    		}
+
+    		footer p {
+        		margin: 0px 0; /* Add spacing */
+        		font-size: 10px; /* Slightly smaller text */
+    		}
+
+    		footer a {
+        		display: inline-block;
+        		font-size: 10px; /* Readable size */
+       			margin: 0 5px; /* Add small spacing */ }
+		}
+
+</style>
+<footer>
+	<p>&copy; 2025 𝐀𝐚𝐫𝐨𝐧𝐉𝐚𝐲𝐒𝐩𝐢𝐧𝐳.𝐜𝐨𝐦. All rights reserved.</p>
+    	<p><a href="../policy.html#disclaimer">Terms of Service</a> | <a href="../policy.html#privacy-policy">Privacy Policy</a></p>
+</footer>
+
+
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino Links</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css"> <!-- Link to your global styles -->
+	<style>
+       		body {
+	    		background: url('../assets/casino-background.gif') no-repeat center center fixed;
+	   		background-size: cover;
+	    		background-color: black; /* Fallback color if the image doesn't load */
+	    		color: white;
+	    		margin: 0;
+	    		padding: 0;
+	    		min-height: 100vh; /* Ensures full viewport height */
+			display: flex;
+    			justify-content: center;  /* Centers horizontally */
+    			align-items: center;
+			min-height: 100vh;
+		}
+	
+    		@media (max-width: 768px) { 
+    		body {
+        		background: url('assets/casino-background.gif') no-repeat;
+        		background-size: auto 100vh; /* Ensures full height */
+        		background-color: black; /* Fallback color */
+        		background-repeat: repeat-y; /* Enables vertical repeat */
+        		animation: backgroundLoop 15s linear infinite; /* Animation duration */
+    			flex-direction: column; /* Stack content from top to bottom */
+			overflow-x: hidden; /* Prevents any horizontal scrolling */
+		}
+
+   	 	@keyframes backgroundLoop {
+        		0% { background-position: 100% center; }
+        		50% { background-position: 0% center; }
+        		100% { background-position: 100% center; } }
+		}
+	.leaderboard-box {
+	    width: 320px; /* Slightly wider */
+	    padding: 20px;
+	    background: linear-gradient(145deg, #1a1a1a, #222); /* Subtle gradient */
+	    color: white;
+	    border-radius: 15px;
+	    text-align: center;
+	    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7); /* Gold glow */
+	    border: 2px solid transparent;
+	    background-clip: padding-box;
+	    position: relative;
+	    overflow: hidden;
+	}
+
+	.leaderboard-box::before {
+	    content: "";
+	    position: absolute;
+	    top: -2px;
+	    left: -2px;
+	    right: -2px;
+	    bottom: -2px;
+	    background: linear-gradient(90deg, #FFD700, #ff6600, #FFD700);
+	    z-index: -1;
+	    border-radius: 15px;
+	    filter: blur(5px);
+	}
+        .leaderboard-box h3 {
+	    color: #FFD700; /* Gold */
+	    font-size: 24px;
+	    margin-bottom: 10px;
+	    text-shadow: 0 0 10px #FFD700, 0 0 20px #ff6600;
+	    animation: glow-pulse 1.5s infinite alternate;
+	}
+
+	@keyframes glow-pulse {
+	    0% { text-shadow: 0 0 10px #FFD700, 0 0 20px #ff6600; }
+	    100% { text-shadow: 0 0 15px #FFD700, 0 0 25px #ff6600; }
+	}
+
+
+        .leaderboard-box p {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .leaderboard-box a {
+	    color: #22caec;
+	    text-decoration: none;
+	    font-weight: bold;
+	    font-size: 16px;
+	    transition: all 0.3s ease-in-out;
+	}
+
+        .leaderboard-box a:hover {
+	    text-shadow: 0 0 10px #FFD700, 0 0 15px #ff6600;
+	    transform: scale(1.1);
+	}
+	h2 {
+            color: #FFD700;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+	.table-container {
+	    margin-top: 50px; /* Increase this value to move it lower */
+	    width: 100%;
+	    max-width: 600px;
+	    margin-left: auto;
+	    margin-right: auto;
+	    border-radius: 15px;
+	    overflow: auto;
+	    background: rgba(255, 255, 255, 0.1);
+	    box-shadow: 0 0 15px rgba(30, 144, 255, 0.5);
+	    padding: 5px; /* Adds space inside the container */
+	}
+
+	.table-dark {
+	    width: 100%;
+	    border-collapse: collapse;
+	    text-align: left;
+	    font-family: "Poppins", sans-serif;
+	    border-radius: 15px;
+	    overflow: hidden;
+	}
+
+	.table-dark thead {
+ 	   background: linear-gradient(45deg, #4B0082, #1E90FF);
+ 	   color: white;
+	    font-weight: bold;
+	    text-transform: uppercase;
+	}
+
+	.table-dark td, .table-dark th {
+	    border: 1px solid rgba(255, 255, 255, 0.3);
+	}
+
+	.table-dark tbody tr:hover {
+	    background-color: rgba(255, 255, 255, 0.1);
+	}
+
+	.table-dark tbody tr:nth-child(odd) {
+	    background: rgba(255, 255, 255, 0.1);
+	}
+
+	.table-dark tbody tr:hover {
+	    background: rgba(30, 144, 255, 0.2);
+ 	   transition: 0.3s ease-in-out;
+	}
+
+	.rank-img {
+	    width: 25px; /* Increase profile picture size */
+	    height: 25px;
+	    border-radius: 50%; /* Make images circular */
+	    margin-right: 8px;
+	}
+
+	a {
+	    text-decoration: none;
+	    font-weight: bold;
+	    color: white;
+	    transition: color 0.3s;
+	}
+
+	a:hover {
+	    color: #1E90FF;
+	}
+	.rank-badge {
+	    background-color: #555;
+ 	    color: white;
+	    padding: 5px 10px;
+	    border-radius: 8px;
+	    font-weight: bold;
+	}
+	.gold {
+	    background: linear-gradient(135deg, #FFD700, #FFB300); /* Gold gradient */
+	    color: black;
+	    border: 1px solid #DAA520;
+	}
+
+	.silver {
+	    background: linear-gradient(135deg, #C0C0C0, #A9A9A9); /* Silver gradient */
+	    color: black;
+	    border: 1px solid #808080;
+	}
+
+	.bronze {
+	    background: linear-gradient(135deg, #CD7F32, #A45A2A); /* Bronze gradient */
+	    color: white;
+	    border: 1px solid #8B4513;
+	}
+    </style>
+</head>
+<body>
+	<div class="main-content">
+<!-- Marquee Box -->
+	<div class="marquee-container">
+    	<div class="marquee-content" id="marqueeText"></div>
+	</div>
+
+
+	<script>
+    		const socialLinks = `
+        		<a href="https://kick.com/aaron_jay" target="_blank">
+            		<img src="../assets/Kick2.png" alt="Kick" width="20">Watch Live on Kick
+        		</a> |
+        		<a href="https://discord.gg/zj8rQeBHvm" target="_blank">
+            		<img src="../assets/Discord2.png" class="icon">Join Discord Community 
+        		</a> |
+        		<a href="https://x.com/AaronJaySpinz" target="_blank">
+            		<img src="../assets/Twitter2.png" class="icon">Follow me on Twitter
+        		</a> |
+        		<a href="https://www.youtube.com/@Aaronjayspinz" target="_blank">
+            		<img src="../assets/YouTube2.png" class="icon">Subscribe on YouTube
+        		</a>
+    			`;
+
+    		const cryptoTemplate = (btc, eth, sol, ltc) => `
+        		<img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="icon"> BTC: $${btc} |
+        		<img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="icon"> ETH: $${eth} |
+        		<img src="https://cryptologos.cc/logos/solana-sol-logo.png" class="icon"> SOL: $${sol} |
+        		<img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png" class="icon"> LTC: $${ltc}
+    			`;
+
+    		let currentBatch = "social"; // Track which batch is showing
+
+    		// Function to fetch cryptocurrency prices
+    		async function fetchCryptoPrices() {
+        		try {
+            		let response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,litecoin&vs_currencies=usd');
+            		let data = await response.json();
+
+            	return cryptoTemplate(
+                	data.bitcoin.usd.toLocaleString(),
+                	data.ethereum.usd.toLocaleString(),
+                	data.solana.usd.toLocaleString(),
+                	data.litecoin.usd.toLocaleString()
+            		);
+       		} catch (error) {
+            		console.error("Error fetching crypto prices:", error);
+            		return "Error loading prices...";
+        		}
+    		}
+
+    	
+		// Function to update the marquee content
+    			async function updateMarquee() {
+        		const marquee = document.getElementById("marqueeText");
+
+        	if (currentBatch === "social") {
+            		marquee.innerHTML = socialLinks;
+            		currentBatch = "crypto";
+        	} else {
+            		marquee.innerHTML = await fetchCryptoPrices();
+            		currentBatch = "social";
+        	}
+
+        		marquee.style.animation = "none"; // Reset animation
+        		void marquee.offsetWidth; // Trigger reflow
+        		marquee.style.animation = "marquee 20s linear infinite"; // Restart animation
+    		}
+
+    		// Start the scrolling process when the page loads
+    			window.addEventListener('load', () => {
+        		updateMarquee(); // Initial batch (social links)
+        
+        	// Loop through alternating batches
+        		setInterval(async () => {
+            		await updateMarquee(); // Wait for the current batch to finish
+        		}, 20000); // Adjust to match the time duration of the scroll (20 seconds)
+    			});
+	</script>
+
+<button id="menu-toggle" class="menu-button">Hide Menu</button>
+
+	<div class="fixed-buttons">
+    		<a href="../index.html">𝗛𝗼𝗺𝗲</a>
+    		<a href="../deposit-event.html">𝗔𝗿𝗰𝘁𝗶𝗰𝗕𝗲𝘁𝘀 𝗗𝗲𝗽𝗼𝘀𝗶𝘁 𝗘𝘃𝗲𝗻𝘁𝘀</a>
+    		<a href="../casinolinks.html">𝗖𝗮𝘀𝗶𝗻𝗼 𝗟𝗶𝗻𝗸𝘀</a>
+    		<a href="../support.html">𝗖𝗼𝗻𝘁𝗮𝗰𝘁 𝗦𝘂𝗽𝗽𝗼𝗿𝘁</a>
+    		<a href="../policy.html">𝗣𝗿𝗶𝘃𝗮𝗰𝘆 𝗣𝗼𝗹𝗶𝗰𝘆</a>
+	</div>
+
+	<script>
+    		document.addEventListener("DOMContentLoaded", function () {
+        	const menuButton = document.getElementById("menu-toggle");
+        	const menu = document.querySelector(".fixed-buttons");
+
+        	// Ensure the menu is always visible at the start
+        		menu.style.display = "block";
+        		menuButton.textContent = "Menu"; // Default button text
+
+        	menuButton.addEventListener("click", function () {
+            	if (menu.style.display === "none") {
+                	menu.style.display = "block";
+                	menuButton.textContent = "Hide ☰";
+            	} else {
+                	menu.style.display = "none";
+                	menuButton.textContent = "Show ☰";
+            	}
+        	});
+    		});
+	</script>
+
+<style>
+.giveaway-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 20px;
+    background: linear-gradient(45deg, #4B0082, #1E90FF, #4B0082);
+    box-shadow: 0 0 25px rgba(30, 144, 255, 0.8);
+    animation: border-glow 2s infinite alternate ease-in-out;
+    text-align: center;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    margin-top: 360px;
+    left: 50px;
+}
+
+/* Border Animation */
+@keyframes border-glow {
+    0% { box-shadow: 0 0 15px rgba(30, 144, 255, 0.6); }
+    100% { box-shadow: 0 0 35px rgba(75, 0, 130, 1); }
+}
+
+/* Title Styling */
+.giveaway-title {
+    font-size: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    animation: fade-in 1.5s ease-in-out forwards;
+}
+
+/* Text Fade-in Effect */
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Prize Amount Styling */
+.giveaway-amount {
+    display: inline-block;
+    font-size: 28px;
+    font-weight: 800;
+    padding: 8px 15px;
+    margin-top: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #00FFFF;
+    border-radius: 12px;
+    text-shadow: 2px 2px 6px rgba(0, 255, 255, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect for Giveaway Amount */
+.giveaway-amount:hover {
+    transform: scale(1.1);
+}
+
+/* Black Text Border for "Total Prizes Given:" */
+.prize-text {
+    text-shadow: 
+        -2px -2px 0 black,  
+         2px -2px 0 black,  
+        -2px  2px 0 black,  
+         2px  2px 0 black;
+}
+
+/* Animated Prize Display ($ + Number Together) */
+.animated-prize {
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 900;
+    color: #f5c308;
+    text-shadow: 3px 3px 12px rgba(0, 0, 0, 1);
+    animation: pulse 1.5s infinite alternate ease-in-out;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+/* Subtle Floating Animation */
+.floating {
+    animation: floating 3s infinite ease-in-out;
+}
+
+@keyframes floating {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+/* Mobile Optimization */
+@media (max-width: 480px) {
+    .giveaway-container {
+        position: relative;
+	padding: 12px;
+        margin-top: 50px; /* Adjusts spacing for smaller screens */
+	width: 60vw;
+	border-radius: 10px;
+	left: 50px;
+    }
+    .giveaway-title {
+        font-size: 16px;
+    }
+    .giveaway-amount {
+        font-size: 18px;
+        padding: 6px 12px;
+    }
+    .animated-prize {
+        font-size: 20px;
+    }
+}
+
+</style>
+
+<!-- Giveaway Stats Section -->
+<div class="giveaway-container">
+    <div class="giveaway-title">
+        𝔸𝔸ℝ𝕆ℕ 𝕁𝔸𝕐 𝕋𝕆𝕋𝔸𝕃 ℙℝ𝕀ℤ𝔼𝕊
+	<br>
+	𝐓𝐨𝐭𝐚𝐥 𝐆𝐢𝐯𝐞𝐚𝐰𝐚𝐲 𝐇𝐨𝐬𝐭𝐞𝐝: <span style="color: gold;">𝟑𝟔</span>
+    </div>
+    <div>
+        <span class="giveaway-amount">
+            🎁 <span class="prize-text">Total Prizes Given:</span> 
+            <span id="prize-display" class="animated-prize">$0.00</span>
+        </span>
+    </div>
+</div>
+
+<script>
+    // Number Count Animation Effect
+    function animateNumber(elementId, start, end, duration) {
+        let obj = document.getElementById(elementId);
+        let range = end - start;
+        let startTime = null;
+        
+        function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            let progress = timestamp - startTime;
+            let current = Math.min(start + (range * (progress / duration)), end);
+            obj.innerText = `$${current.toFixed(2)}`;
+            if (progress < duration) {
+                requestAnimationFrame(step);
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
+    // Start the animation when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        animateNumber("prize-display", 0, 1048.63, 2000);
+    });
+</script>
+
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #111;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            max-width: 90%;
+            margin: auto;
+        }
+
+        .table-container {
+            width: 100%;
+            max-width: 800px;
+            background: #222;
+            border-radius: 10px;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        .arrow {
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            color: white;
+            border-radius: 50%;
+            user-select: none;
+        }
+
+        .arrow-left { left: -50px; }
+        .arrow-right { right: -50px; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #444;
+        }
+
+        th { background: #333; }
+
+        .rank-badge { font-size: 18px; font-weight: bold; }
+        .gold { color: gold; }
+        .silver { color: silver; }
+        .bronze { color: #cd7f32; }
+
+        img.rank-img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: bold;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .arrow { font-size: 24px; padding: 8px; }
+            .arrow-left { left: -30px; }
+            .arrow-right { right: -30px; }
+        }
+
+        @media (max-width: 480px) {
+            .arrow { font-size: 20px; padding: 6px; }
+            .arrow-left { left: -20px; }
+            .arrow-right { right: -20px; }
+            th, td { padding: 6px; font-size: 14px; }
+        }
+
+/* Tablet View */
+    @media (max-width: 768px) {
+        .arrow { font-size: 24px; padding: 8px; }
+        .arrow-left { left: -30px; }
+        .arrow-right { right: -30px; }
+        th, td { padding: 8px; font-size: 14px; }
+    }
+
+    /* Mobile View */
+    @media (max-width: 480px) {
+        .arrow { font-size: 20px; padding: 6px; }
+        .arrow-left { left: 5px; }
+        .arrow-right { right: 5px; }
+    
+@media (max-width: 768px) {    
+    .table-container {
+            width: 800%;
+            max-width: 400px;
+            background: #222;
+            border-radius: 10px;
+            padding: 10px;
+            overflow: hidden;
+	    font-size: 8px;
+	    margin: auto;
+        }
+	
+
+        table { min-width: 500px; } /* Ensures proper scrolling */
+        
+        th, td { padding: 6px; font-size: 13px; }
+    }
+
+.pagination {
+    margin-top: 15px; /* Adds space between table and pagination */
+    text-align: center; /* Centers the buttons */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Adds space between buttons */
+}
+
+.pagination button {
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background-color: #ff4500;
+    color: white;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.pagination button:disabled {
+    background-color: #888; /* Gray out when disabled */
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <span class="arrow arrow-left" onclick="prevLeaderboard()">&#9665;</span>
+
+<div class="table-container">
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Discord</th>
+                <th>Giveaway</th>
+                <th>Wager</th>
+                <th>Bonus Buy</th>
+                <th>Total Prizes</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboard-body">
+            <!-- Rows will be inserted dynamically -->
+        </tbody>
+    </table>
+</div>
+
+    <span class="arrow arrow-right" onclick="nextLeaderboard()">&#9655;</span>
+</div>
+
+<script>
+let leaderboardPages = [
+    "../leaderboard/instream-leaderboard.html",
+    "../leaderboard/wager-leaderboard.html",
+    "../leaderboard/wheel-leaderboard.html",
+    "../leaderboard/totalprize-leaderboard.html"
+];
+
+// Retrieve the last saved page index from localStorage, default to 0 if not found
+let currentPageIndex = parseInt(localStorage.getItem("leaderboardPageIndex")) || 0;
+
+function prevLeaderboard() {
+    currentPageIndex = (currentPageIndex - 1 + leaderboardPages.length) % leaderboardPages.length;
+    localStorage.setItem("leaderboardPageIndex", currentPageIndex); // Save index
+    window.location.href = leaderboardPages[currentPageIndex];
+}
+
+function nextLeaderboard() {
+    currentPageIndex = (currentPageIndex + 1) % leaderboardPages.length;
+    localStorage.setItem("leaderboardPageIndex", currentPageIndex); // Save index
+    window.location.href = leaderboardPages[currentPageIndex];
+}
+</script>
+
+<script>
+    const leaderboardData = [
+        { rank: 1, discord: "Keshav3473", avatar: "729762833406885989", hash: "b9314a8dbbf09cb3da1d9ce45b3979dc", giveaway: "$0.0", wager: "$125.0", bonusBuy: "$56.5", total: "$181.5" },
+        { rank: 2, discord: "DentNinja", avatar: "217771156973944832", hash: "1920203693eeaadf7a88a3bd5d4b9651", giveaway: "$0.0", wager: "$150.0", bonusBuy: "$0.0", total: "$150.0" },
+        { rank: 3, discord: "Rowelie", avatar: "927475447464329236", hash: "8a421b2217a86bd256c08e9479514e89", giveaway: "$10.0", wager: "$0.0", bonusBuy: "$114.19", total: "$124.19" },
+        { rank: "#4", discord: "Dtrix", avatar: "488015447417946151", hash: "19e7b770b91a24f3891e8646dc09d335", giveaway: "$7.0", wager: "$0.0", bonusBuy: "$113.71", total: "$120.71" },
+        { rank: "#5", discord: "mysticmethods", avatar: "530190686478270467", hash: "12831fdf1e799a2188a35322aa15e43e", giveaway: "$3.0", wager: "$75.0", bonusBuy: "$39.52", total: "$117.52" },
+        { rank: "#6", discord: "Taynara", avatar: "548478180780933132", hash: "c20a092363e2dece5c48b8554ea819af", giveaway: "$0.0", wager: "$0.0", bonusBuy: "$75.6", total: "$75.6" },
+        { rank: "#7", discord: "QueenZ", avatar: "657584864463159308", hash: "36447d9df5373b7fe2b1f3e975110930", giveaway: "$0.0", wager: "$0.0", bonusBuy: "$51.5", total: "$51.5" },
+        { rank: "#8", discord: "NorbeH_", avatar: "499615876258201600", hash: "fabb353943eb548f0994f2439977ecb5", giveaway: "$0.0", wager: "$0.0", bonusBuy: "$50.6", total: "$50.6" },
+        { rank: "#9", discord: "Kimmy", avatar: "898589521711616070", hash: "d168250e306cdcad2ab041b98ca95745", giveaway: "$0.0", wager: "$0.0", bonusBuy: "$42.52", total: "$42.52" },
+        { rank: "#10", discord: "saminftz", avatar: "897713991978209310", hash: "dec118e67baa63bd78e0ca725cf176dc", giveaway: "$0.0", wager: "$25.0", bonusBuy: "$15.9", total: "$40.9" },
+        { rank: "#11", discord: "MC", avatar: "1265873964450840627", hash: "ec54aefaf6e206130184855aecdca73f", giveaway: "$5.0", wager: "$0.0", bonusBuy: "$32.69", total: "$37.69" },
+        { rank: "#12", discord: "dewiputewasi", avatar: "988865245793636392", hash: "bd37fa5476ccf70ef6c784712a2055db", giveaway: "$10.0", wager: "$0.0", bonusBuy: "$15.9", total: "$25.9" },
+        { rank: "#13", discord: "JP_FLEX", avatar: "1092352859858812960", hash: "94a53b8de732dca32464f69bfbf4fe8b", giveaway: "$25.0", wager: "$0.0", bonusBuy: "$0.0", total: "$25.0" },
+        { rank: "#14", discord: "anitakhauk", avatar: "1018329485126410270", hash: "1782ba872670bd95342986543e39e479", giveaway: "$5.0", wager: "$0.0", bonusBuy: "$0.0", total: "$5.0" }
+    ];
+
+    const rowsPerPage = 10;
+    let currentPage = 1;
+
+    function renderTable() {
+        const tbody = document.getElementById("leaderboard-body");
+        tbody.innerHTML = ""; // Clear existing rows
+
+        const start = (currentPage - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+        const pageData = leaderboardData.slice(start, end);
+
+        pageData.forEach((data, index) => {
+            const row = document.createElement("tr");
+
+     let rankBadgeClass = "";
+        let rankIcon = "";
+        if (data.rank === 1) {
+            rankBadgeClass = "gold";
+            rankIcon = "🥇";
+        } else if (data.rank === 2) {
+            rankBadgeClass = "silver";
+            rankIcon = "🥈";
+        } else if (data.rank === 3) {
+            rankBadgeClass = "bronze";
+            rankIcon = "🥉";
+        } else {
+            rankBadgeClass = "regular";
+            rankIcon = data.rank;
+        }
+
+        row.innerHTML = `
+            <td><span class="rank-badge ${rankBadgeClass}">${rankIcon}</span></td>
+                <td style="display: flex; align-items: center;">
+                    <img src="https://cdn.discordapp.com/avatars/${data.avatar}/${data.hash}.png" 
+                        class="rank-img" style="width: 20px; height: 20px; margin-right: 5px;">
+                    <a href="https://discord.com/users/${data.avatar}" target="_blank" 
+                        style="text-decoration: none; font-weight: bold; color: inherit;">
+                        ${data.discord}
+                    </a>
+                </td>
+                <td>${data.giveaway}</td>
+                <td>${data.wager}</td>
+                <td>${data.bonusBuy}</td>
+                <td>${data.total}</td>
+            `;
+
+            tbody.appendChild(row);
+        });
+
+        document.getElementById("pageInfo").textContent = `Page ${currentPage} of ${Math.ceil(leaderboardData.length / rowsPerPage)}`;
+
+        document.getElementById("prevPage").disabled = currentPage === 1;
+        document.getElementById("nextPage").disabled = end >= leaderboardData.length;
+    }
+
+    function changePage(direction) {
+        currentPage += direction;
+        renderTable();
+    }
+
+    renderTable();
+</script>
+</div>
+</div>
+
+<div class="pagination">
+    <button id="prevPage" onclick="changePage(-1)" disabled>Previous</button>
+    <span id="pageInfo">Page 1</span>
+    <button id="nextPage" onclick="changePage(1)">Next</button>
+</div>
+
+</body>
+
+<style>
+  footer {
+    	text-align: center;
+    	margin-top: 0;
+    	padding: 1px 0;
+    	background: rgba(34, 34, 34, 0.9);
+    	color: #fff;
+    	font-size: 10px; !important;
+    	border-top: 1px solid #00AEEF;
+    	white-space: nowrap;
+    	height: auto;
+    	position: relative;
+    	bottom: -20px;
+    	left: 0;
+    	width: 100vw; /* Full viewport width */
+    	min-width: 100%; /* Ensure no gaps */
+    }
+
+
+ footer a {
+    	color: #00AEEF;
+    	text-decoration: none;
+    }
+
+ footer a:hover {
+    	text-decoration: underline;
+    }
+
+ footer p {
+    	margin: 0 5px; /* Adds a small space between elements */
+    	margin-left: 0;
+    }
+
+		/* ✅ Mobile-Friendly Footer */
+		@media (max-width: 768px) {
+    		footer {
+        		font-size: 12px; /* Adjust font size */
+        		padding: 5px 0; /* Reduce padding */
+        		text-align: center;
+        		white-space: normal; /* Allow text wrapping */
+        		width: 100%; /* Ensures it spans full width */
+        		min-width: 100%;
+        		position: relative;
+        		bottom: 0;
+        		left: 0; /* Remove offset */
+        		background: rgba(34, 34, 34, 0.95); /* Slightly darker for readability */
+    		}
+
+    		footer p {
+        		margin: 0px 0; /* Add spacing */
+        		font-size: 10px; /* Slightly smaller text */
+    		}
+
+    		footer a {
+        		display: inline-block;
+        		font-size: 10px; /* Readable size */
+       			margin: 0 5px; /* Add small spacing */ }
+		}
+
+</style>
+<footer>
+	<p>&copy; 2025 𝐀𝐚𝐫𝐨𝐧𝐉𝐚𝐲𝐒𝐩𝐢𝐧𝐳.𝐜𝐨𝐦. All rights reserved.</p>
+    	<p><a href="../policy.html#disclaimer">Terms of Service</a> | <a href="../policy.html#privacy-policy">Privacy Policy</a></p>
+</footer>
+
+
+</html>

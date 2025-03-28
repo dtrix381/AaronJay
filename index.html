@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    		<title>Aaron Jay</title>
+    		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    		<link rel="stylesheet" href="styles.css"> <!-- Link to your global styles -->
+	<style>
+       		body {
+	    		background: url('assets/casino-background.gif') no-repeat center center fixed;
+	   		background-size: cover;
+	    		background-color: black; /* Fallback color if the image doesn't load */
+	    		color: white;
+	    		margin: 0;
+	    		padding: 0;
+	    		min-height: 100vh; /* Ensures full viewport height */
+		}
+	
+    		@media (max-width: 768px) { 
+    		body {
+        		background: url('assets/casino-background.gif') no-repeat;
+        		background-size: auto 100vh; /* Ensures full height */
+        		background-color: black; /* Fallback color */
+        		background-repeat: repeat-y; /* Enables vertical repeat */
+        		animation: backgroundLoop 15s linear infinite; /* Animation duration */
+    		}
+
+   	 	@keyframes backgroundLoop {
+        		0% { background-position: 100% center; }
+        		50% { background-position: 0% center; }
+        		100% { background-position: 100% center; } }
+		}
+
+    	</style>
+</head>
+
+<body>
+	<div class="main-content">
+	<div id="age-popup" class="popup-overlay">
+    	<div class="popup-box">
+        	<h2>⚠️ Age Verification</h2>
+        	<p>You must be <b>18+</b> to access this website. This site contains casino-related content.</p>
+        	<label>
+            	<input type="checkbox" id="age-check"> I confirm that I am 18 or older.
+        	</label>
+        	<button id="proceed-button" disabled>Proceed</button>
+    	</div>
+	</div>
+
+	<style>
+		/* Pop-up Styles */
+		.popup-overlay {
+    			position: fixed;
+    			top: 0;
+    			left: 0;
+    			width: 100%;
+    			height: 100%;
+    			background: rgba(0, 0, 0, 0.85);
+    			display: flex;
+    			justify-content: center;
+    			align-items: center;
+    			z-index: 9999;
+		}
+
+		.popup-box {
+    			background: #222;
+    			color: white;
+    			padding: 20px;
+    			text-align: center;
+    			border-radius: 10px;
+    			max-width: 400px;
+    			box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+		}
+
+		.popup-box h2 {
+			color: #FFD700;
+		}
+
+		.popup-box button {
+    			margin-top: 15px;
+    			padding: 10px;
+    			border: none;
+    			background-color: #FFD700;
+    			color: black;
+    			font-weight: bold;
+    			cursor: pointer;
+    			border-radius: 5px;
+		}
+
+		.popup-box button:disabled {
+    			background-color: gray;
+    			cursor: not-allowed;
+		}
+
+	</style>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+    		const popup = document.getElementById("age-popup");
+    		const checkbox = document.getElementById("age-check");
+    		const proceedButton = document.getElementById("proceed-button");
+
+    		// Check if user has already verified age
+    			if (localStorage.getItem("ageVerified") === "true") {
+        		popup.style.display = "none"; // Hide pop-up
+    			} else {
+        		popup.style.display = "flex"; // Show pop-up
+    			}
+
+    		// Enable the button only if checkbox is checked
+    			checkbox.addEventListener("change", function () {
+        		proceedButton.disabled = !this.checked;
+    			});
+
+    		// Proceed and store verification
+    			proceedButton.addEventListener("click", function () {
+        		localStorage.setItem("ageVerified", "true");
+        		popup.style.display = "none"; // Hide pop-up
+    		});
+		});
+	</script>
+
+<!-- Marquee Box -->
+	<div class="marquee-container">
+    	<div class="marquee-content" id="marqueeText"></div>
+	</div>
+
+
+	<script>
+    		const socialLinks = `
+        		<a href="https://kick.com/aaron_jay" target="_blank">
+            		<img src="assets/Kick2.png" alt="Kick" width="20"> Watch Live on Kick
+        		</a> |
+        		<a href="https://discord.gg/zj8rQeBHvm" target="_blank">
+            		<img src="assets/Discord2.png" class="icon"> Join Discord Community 
+        		</a> |
+        		<a href="https://x.com/AaronJaySpinz" target="_blank">
+            		<img src="assets/Twitter2.png" class="icon"> Follow me on Twitter
+        		</a> |
+        		<a href="https://www.youtube.com/@Aaronjayspinz" target="_blank">
+            		<img src="assets/YouTube2.png" class="icon"> Subscribe on YouTube
+        		</a>
+    			`;
+
+    		const cryptoTemplate = (btc, eth, sol, ltc) => `
+        		<img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="icon"> BTC: $${btc} |
+        		<img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="icon"> ETH: $${eth} |
+        		<img src="https://cryptologos.cc/logos/solana-sol-logo.png" class="icon"> SOL: $${sol} |
+        		<img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png" class="icon"> LTC: $${ltc}
+    			`;
+
+    		let currentBatch = "social"; // Track which batch is showing
+
+    		// Function to fetch cryptocurrency prices
+    		async function fetchCryptoPrices() {
+        		try {
+            		let response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,litecoin&vs_currencies=usd');
+            		let data = await response.json();
+
+            	return cryptoTemplate(
+                	data.bitcoin.usd.toLocaleString(),
+                	data.ethereum.usd.toLocaleString(),
+                	data.solana.usd.toLocaleString(),
+                	data.litecoin.usd.toLocaleString()
+            		);
+       		} catch (error) {
+            		console.error("Error fetching crypto prices:", error);
+            		return "Error loading prices...";
+        		}
+    		}
+
+    	
+		// Function to update the marquee content
+    			async function updateMarquee() {
+        		const marquee = document.getElementById("marqueeText");
+
+        	if (currentBatch === "social") {
+            		marquee.innerHTML = socialLinks;
+            		currentBatch = "crypto";
+        	} else {
+            		marquee.innerHTML = await fetchCryptoPrices();
+            		currentBatch = "social";
+        	}
+
+        		marquee.style.animation = "none"; // Reset animation
+        		void marquee.offsetWidth; // Trigger reflow
+        		marquee.style.animation = "marquee 20s linear infinite"; // Restart animation
+    		}
+
+    		// Start the scrolling process when the page loads
+    			window.addEventListener('load', () => {
+        		updateMarquee(); // Initial batch (social links)
+        
+        	// Loop through alternating batches
+        		setInterval(async () => {
+            		await updateMarquee(); // Wait for the current batch to finish
+        		}, 20000); // Adjust to match the time duration of the scroll (20 seconds)
+    			});
+	</script>
+
+<button id="menu-toggle" class="menu-button">Hide Menu</button>
+
+	<div class="fixed-buttons">
+    		<a href="deposit-event.html">𝗔𝗿𝗰𝘁𝗶𝗰𝗕𝗲𝘁𝘀 𝗗𝗲𝗽𝗼𝘀𝗶𝘁 𝗘𝘃𝗲𝗻𝘁𝘀</a>
+    		<a href="casinolinks.html">𝗖𝗮𝘀𝗶𝗻𝗼 𝗟𝗶𝗻𝗸𝘀</a>
+    		<a href="leaderboard.html">𝗟𝗲𝗮𝗱𝗲𝗿𝗯𝗼𝗮𝗿𝗱</a>
+    		<a href="support.html">𝗖𝗼𝗻𝘁𝗮𝗰𝘁 𝗦𝘂𝗽𝗽𝗼𝗿𝘁</a>
+    		<a href="policy.html">𝗣𝗿𝗶𝘃𝗮𝗰𝘆 𝗣𝗼𝗹𝗶𝗰𝘆</a>
+	</div>
+
+	<script>
+    		document.addEventListener("DOMContentLoaded", function () {
+        	const menuButton = document.getElementById("menu-toggle");
+        	const menu = document.querySelector(".fixed-buttons");
+
+        	// Ensure the menu is always visible at the start
+        		menu.style.display = "block";
+        		menuButton.textContent = "Menu"; // Default button text
+
+        	menuButton.addEventListener("click", function () {
+            	if (menu.style.display === "none") {
+                	menu.style.display = "block";
+                	menuButton.textContent = "Hide ☰";
+            	} else {
+                	menu.style.display = "none";
+                	menuButton.textContent = "Show ☰";
+            	}
+        	});
+    		});
+	</script>
+
+
+	<style>
+    		/* Centered Container */
+    		.container {
+        		text-align: center;
+        		margin-top: 50px;
+    		}
+
+    		/* Profile Image Styling */
+    			.profile-image {
+        		width: 150px;
+        		border-radius: 50%;
+        		border: 4px solid #FFD700; /* Yellow Outline */
+        		box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        		transition: transform 0.5s ease-in-out;
+    		}
+
+    		/* Rotate Image on Hover */
+    		.profile-image:hover {
+        		transform: rotate(360deg);
+    		}
+
+    		/* Name Styling */
+    		.profile-name {
+        		font-size: 36px;
+        		font-weight: bold;
+        		color: #00FF00; /* Green Color */
+        		text-shadow: 3px 3px 10px rgba(0, 255, 0, 0.8); /* Green Glow */
+        		animation: flicker 1.5s infinite alternate;
+    		}
+
+		/* Default styles (for desktop) */
+    		.profile-text {
+    			font-size: 20px; /* Standard size for larger screens */
+    			text-align: center;
+    		}
+
+    		/* Flicker Animation for Text */
+    		@keyframes flicker {
+        		0% { opacity: 1; text-shadow: 3px 3px 10px rgba(0, 255, 0, 1); }
+        		50% { opacity: 0.8; text-shadow: 3px 3px 15px rgba(0, 200, 0, 0.8); }
+        		100% { opacity: 1; text-shadow: 3px 3px 10px rgba(0, 255, 0, 1); }
+    			}
+
+		/* Adjustments for Mobile */
+		@media (max-width: 768px) {
+    		.profile-name {
+        		font-size: 18px; /* Reduce font size on small screens */
+    			}
+    
+    		.profile-image {
+        		width: 75px; /* Make profile picture smaller */
+			margin-top: -20px;
+    		}
+
+    		.mt-4 {
+        		flex-direction: row; /* Stack buttons on smaller screens */
+        		align-items: center;
+    		}
+
+    		.mt-4 a {
+        		width: 35%; /* Make buttons full width for easy tapping */
+        		font-size: 7px;
+        		padding: 1px;
+    		}
+    		.profile-text {
+        		font-size: 12px; /* Smaller text on mobile */
+    			text-align: center;}
+    		}
+
+	</style>
+
+
+<!-- Profile Section -->
+	<div class="container">
+    		<img src="assets/AaronJay.png" alt="Aaron Jay" class="profile-image">
+    		<h1 class="profile-name">𝔸𝔸ℝ𝕆ℕ 𝕁𝔸𝕐</h1>
+	<div style="text-align: center;">
+        	<p class="profile-text">𝐅𝐫𝐨𝐦 𝐂𝐚𝐧𝐚𝐝𝐚 𝐬𝐩𝐢𝐧𝐧𝐢𝐧𝐠 𝐬𝐥𝐨𝐭𝐬 𝐚𝐧𝐝 𝐩𝐥𝐚𝐲𝐢𝐧𝐠 𝐠𝐚𝐦𝐞𝐬 - 𝐋𝐞𝐭'𝐬 𝐏𝐫𝐢𝐧𝐭!</p>
+        	<p class="profile-text">𝗕𝘂𝘀𝗶𝗻𝗲𝘀𝘀 𝗜𝗻𝗾𝘂𝗶𝗿𝗶𝗲𝘀: 𝗮𝗮𝗿𝗼𝗻𝗷𝗮𝘆𝘀𝗽𝗶𝗻𝘇@𝗴𝗺𝗮𝗶𝗹｡𝗰𝗼𝗺</p>
+
+        <div class="mt-4">
+            	<a href="https://kick.com/aaron_jay" class="btn btn-success" target="_blank">
+                	<img src="assets/Kick.png" alt="Kick" width="20">Watch on Kick
+            	</a>
+            	<a href="https://discord.gg/zj8rQeBHvm" class="btn btn-primary" target="_blank">
+                	<img src="assets/Discord.png" alt="Discord" width="20">Join Discord
+            	</a>
+            	<a href="https://x.com/AaronJaySpinz" class="btn btn-info" target="_blank">
+                	<img src="assets/Twitter.png" alt="Twitter" width="20">Follow on Twitter
+            	</a>
+            	<a href="https://www.youtube.com/@Aaronjayspinz" class="btn btn-danger" target="_blank">
+                	<img src="assets/YouTube.png" alt="YouTube" width="20">Subscribe on YouTube
+            	</a>
+        </div>
+
+	<style>	
+		/* Giveaway Container Styling */
+		.giveaway-container {
+    			position: relative;
+    			width: 100%;
+    			max-width: 600px;
+    			margin: 20px auto;
+    			padding: 20px;
+    			border-radius: 20px;
+    			background: linear-gradient(45deg, #4B0082, #1E90FF, #4B0082);
+    			box-shadow: 0 0 25px rgba(30, 144, 255, 0.8);
+    			animation: border-glow 2s infinite alternate ease-in-out;
+    			text-align: center;
+    			color: white;
+    			font-family: "Poppins", sans-serif;
+    			overflow: hidden;
+    			border: 3px solid rgba(255, 255, 255, 0.2);
+		}
+
+		/* Border Animation */
+		@keyframes border-glow {
+    			0% { box-shadow: 0 0 15px rgba(30, 144, 255, 0.6); }
+    			100% { box-shadow: 0 0 35px rgba(75, 0, 130, 1); }
+		}
+
+		/* Title Styling */
+		.giveaway-title {
+    			font-size: 26px;
+    			font-weight: 800;
+    			letter-spacing: 1.5px;
+    			text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+    			opacity: 1;
+    			animation: fade-in 1.5s ease-in-out forwards;
+		}
+
+		/* Text Fade-in Effect */
+		@keyframes fade-in {
+    			from { opacity: 0; transform: translateY(-15px); }
+    			to { opacity: 1; transform: translateY(0); }
+			}
+
+		/* Prize Amount Styling */
+		.giveaway-amount {
+    			display: inline-block;
+    			font-size: 28px;
+    			font-weight: 800;
+    			padding: 8px 15px;
+    			margin-top: 12px;
+    			background: rgba(255, 255, 255, 0.2);
+    			color: #00FFFF;
+    			border-radius: 12px;
+    			text-shadow: 2px 2px 6px rgba(0, 255, 255, 0.9);
+    			border: 2px solid rgba(255, 255, 255, 0.3);
+    			transition: transform 0.3s ease-in-out;
+		}
+
+		/* Hover Effect for Giveaway Amount */
+		.giveaway-amount:hover {
+    			transform: scale(1.1);
+		}
+
+		/* Black Text Border for "Total Prizes Given:" */
+		.prize-text {
+    			text-shadow: 
+        		-2px -2px 0 black,  
+         		2px -2px 0 black,  
+        		-2px  2px 0 black,  
+         		2px  2px 0 black;
+		}
+
+		/* Animated Prize Display ($ + Number Together) */
+		.animated-prize {
+    			display: inline-block;
+    			font-size: 60px;
+    			font-weight: 900;
+    			color: #f5c308;
+    			text-shadow: 3px 3px 12px rgba(0, 255, 255, 1);
+    			animation: pulse 1.5s infinite alternate ease-in-out;
+		}
+
+		/* Pulse Animation */
+		@keyframes pulse {
+    			0% { transform: scale(1); }
+    			100% { transform: scale(1.1); }
+		}
+
+		/* Subtle Floating Animation */
+		.floating {
+    			animation: floating 3s infinite ease-in-out;
+		}
+
+		@keyframes floating {
+    			0% { transform: translateY(0); }
+    			50% { transform: translateY(-5px); }
+    			100% { transform: translateY(0); }
+		}
+
+		
+		/* Mobile-Friendly Styles */
+		@media (max-width: 768px) {
+    		.giveaway-container {
+        		max-width: 85%; /* Makes it fit smaller screens */
+			height: 100px; 
+        		padding: 10px;
+        		border-radius: 15px;
+    		}
+
+    		.giveaway-title {
+        		font-size: 8px; /* Smaller title font size */
+    		}
+
+    		.animated-prize {
+        		font-size: 7px; /* Adjust prize number */
+    		}
+
+    		/* Border Animation */
+		@keyframes border-glow {
+    			0% { box-shadow: 0 0 15px rgba(30, 144, 255, 0.6); }
+    			100% { box-shadow: 0 0 35px rgba(75, 0, 130, 1); }
+		}
+
+		
+		/* Text Fade-in Effect */
+		@keyframes fade-in {
+    			from { opacity: 0; transform: translateY(-15px); }
+    			to { opacity: 1; transform: translateY(0); }
+		}
+
+		/* Prize Amount Styling */
+		.giveaway-amount {
+    			display: inline-block;
+    			font-size: 14px;
+    			font-weight: 400;
+    			padding: 4px 7px;
+    			margin-top: 12px;
+    			background: rgba(255, 255, 255, 0.2);
+    			color: #00FFFF;
+    			border-radius: 6px;
+    			text-shadow: 2px 2px 6px rgba(0, 255, 255, 0.9);
+    			border: 1px solid rgba(255, 255, 255, 0.3);
+    			transition: transform 0.3s ease-in-out;
+		}
+
+		/* Hover Effect for Giveaway Amount */
+		.giveaway-amount:hover {
+    			transform: scale(1.1);
+		}
+
+		/* Black Text Border for "Total Prizes Given:" */
+		.prize-text {
+    			text-shadow: 
+        		-2px -2px 0 black,  
+        		2px -2px 0 black,  
+        		-2px  2px 0 black,  
+        		2px  2px 0 black;
+		}
+
+		/* Animated Prize Display ($ + Number Together) */
+		.animated-prize {
+    			display: inline-block;
+    			font-size: 15px;
+    			font-weight: 450;
+    			color: #f5c308;
+    			text-shadow: 3px 3px 12px rgba(0, 255, 255, 1);
+    			animation: pulse 1.5s infinite alternate ease-in-out;
+		}
+
+		/* Pulse Animation */
+		@keyframes pulse {
+   	 		0% { transform: scale(1); }
+    			100% { transform: scale(1.1); }
+		}
+
+		/* Subtle Floating Animation */
+			.floating {
+    			animation: floating 3s infinite ease-in-out;
+		}
+
+		@keyframes floating {
+    			0% { transform: translateY(0); }
+    			50% { transform: translateY(-5px); }
+    			100% { transform: translateY(0); }
+		}
+	</style>
+
+<!-- Giveaway Stats Section -->
+	<div class="giveaway-container">
+   	<div class="giveaway-title">
+        	Aaron Jay has been Giving Away some Prizes for his Community!
+    	</div>
+    	<div>
+        	<span class="giveaway-amount">
+            		🎁 <span class="prize-text">Total Prizes Given:</span> 
+        	<span id="prize-display" class="animated-prize">$0.00</span>
+        	</span>
+    	</div>
+	</div>
+
+	<script>
+    		// Number Count Animation Effect
+    		function animateNumber(elementId, start, end, duration) {
+        		let obj = document.getElementById(elementId);
+        		let range = end - start;
+        		let startTime = null;
+        
+        	function step(timestamp) {
+            		if (!startTime) startTime = timestamp;
+            		let progress = timestamp - startTime;
+            		let current = Math.min(start + (range * (progress / duration)), end);
+            		obj.innerText = `$${current.toFixed(2)}`;
+            		if (progress < duration) {
+                requestAnimationFrame(step);
+            		}
+        		}
+        	requestAnimationFrame(step);
+    			}
+
+    		// Start the animation when the page loads
+    		document.addEventListener("DOMContentLoaded", function() {
+        		animateNumber("prize-display", 0, 1048.63, 2000);
+    			});
+	</script>
+
+
+
+
+    	</div>
+	</div>
+
+
+<style>
+    	.video-container {
+        	position: relative;
+        	width: 620px;
+        	margin: auto;
+        	padding: 10px;
+        	border-radius: 15px;
+        	background: linear-gradient(45deg, #FFD700, #FF4500, #FFD700); /* Gold & Orange */
+        	box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); /* Glowing effect */
+        	animation: glow 1.5s infinite alternate;
+        	text-align: center;
+    	}
+
+    	@keyframes glow {
+        	0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        	100% { box-shadow: 0 0 25px rgba(255, 140, 0, 0.9); }
+    	}
+
+    	video {
+        	width: 100%;
+        	border-radius: 10px;
+    	}	
+
+    	.clip-title {
+        	font-size: 24px;
+        	font-weight: bold;
+        	text-align: center;
+        	margin-bottom: 10px;
+        	color: #FFD700; /* Gold */
+        	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        	font-family: Arial, sans-serif;
+    	}
+
+	/* Mobile Responsive */
+	@media (max-width: 768px) {
+    	.video-container {
+        	max-width: 70%; /* Adjust width for smaller screens */
+        	padding: 2px;
+        	border-radius: 5px;
+    		background: linear-gradient(45deg, #FFD700, #FF4500, #FFD700); /* Gold & Orange */
+        	box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); /* Glowing effect */
+        	animation: glow 1.5s infinite alternate;
+        	text-align: center;
+    	}
+
+    	.clip-title {
+        	font-size: 12px; /* Reduce title size */
+    	}
+
+    	video {
+        	border-radius: 5px; }
+	}
+</style>
+
+	<div class="clip-title">𝗧𝗼𝗽 𝗖𝗹𝗶𝗽𝘀</div>
+	<div class="video-container">
+    		<video controls>
+        		<source src="assets/Clip001.mp4" type="video/mp4">
+        			Your browser does not support the video tag.
+    		</video>
+	</div>
+	</div>
+
+
+</body>
+
+<footer>
+	<p>&copy; 2025 𝐀𝐚𝐫𝐨𝐧𝐉𝐚𝐲𝐒𝐩𝐢𝐧𝐳.𝐜𝐨𝐦. All rights reserved.</p>
+    	<p><a href="policy.html#disclaimer">Terms of Service</a> | <a href="policy.html#privacy-policy">Privacy Policy</a></p>
+</footer>
+
+
+</html>

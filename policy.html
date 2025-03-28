@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    		<title>Aaron Jay</title>
+    		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    		<link rel="stylesheet" href="styles.css"> <!-- Link to your global styles -->
+<style>
+        /* General Styles */
+        body {
+            background: url('assets/casino-background.gif') no-repeat center center fixed;
+            background-size: cover;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex: 1; /* Pushes footer to the bottom */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                background-size: auto 100vh;
+                background-repeat: repeat-y;
+                animation: backgroundLoop 15s linear infinite;
+            }
+
+            @keyframes backgroundLoop {
+                0% { background-position: 100% center; }
+                50% { background-position: 0% center; }
+                100% { background-position: 100% center; }
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+            padding: 20px;
+            background: rgba(34, 34, 34, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 174, 239, 0.8);
+        }
+
+        .profile-image {
+       	    top:60px;
+	    width: 100px;
+      	    border-radius: 50%;
+       	    border: 4px solid #FFD700; /* Yellow Outline */
+	    transition: transform 0.5s ease-in-out;
+	}
+	
+	.profile-container {
+    	    background: transparent !important;
+            box-shadow: none !important;
+	}
+
+    	.profile-image:hover {
+       	    transform: rotate(360deg);
+    	}
+
+	.fixed-buttons2 {
+   	    position: fixed;
+   	    top:10px;
+    	    left: 10px;
+    	    display: flex; /* Hidden by default */
+    	    flex-direction: column;
+    	    gap: 0px;
+    	    z-index: 9999;
+	}
+	
+	.fixed-buttons2.show {
+    	    display: flex;
+	}
+	
+	.fixed-buttons2 a {
+   	    display: block;
+   	    text-decoration: none;
+    	    font-weight: bold;
+    	    color: #fff;
+    	    padding: 0px;
+    	    text-align: center;
+    	    transition: all 0.3s ease-in-out;
+    	    background: none;
+    	    background-color: transparent; /* Ensure full transparency */
+            box-shadow: none;
+	}
+
+	.fixed-buttons2 a:hover {
+   	    transform: scale(1.05);
+   	    letter-spacing: 1.5px;
+	}
+
+	.fixed-buttons2 a:active {
+  	    transform: scale(0.98);
+}
+	
+	h1, h2, h3 {
+            text-align: center;
+            color: #00AEEF;
+        }
+
+        h3 {
+            color: #ffcc00;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        /* ✅ Table of Contents */
+        .toc {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .toc li {
+            margin: 10px 0;
+        }
+
+        .toc a {
+            color: #00AEEF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        /* ✅ Back to Top */
+        .back-to-top {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-to-top a {
+            color: #00AEEF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-to-top a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+	<div class="main-content">
+
+
+<!-- Marquee Box -->
+	<div class="marquee-container">
+    	<div class="marquee-content" id="marqueeText"></div>
+	</div>
+
+	<script>
+    		const socialLinks = `
+        		<a href="https://kick.com/aaron_jay" target="_blank">
+            		<img src="assets/Kick2.png" alt="Kick" width="20"> Watch Live on Kick
+        		</a> |
+        		<a href="https://discord.gg/zj8rQeBHvm" target="_blank">
+            		<img src="assets/Discord2.png" class="icon"> Join Discord Community 
+        		</a> |
+        		<a href="https://x.com/AaronJaySpinz" target="_blank">
+            		<img src="assets/Twitter2.png" class="icon"> Follow me on Twitter
+        		</a> |
+        		<a href="https://www.youtube.com/@Aaronjayspinz" target="_blank">
+            		<img src="assets/YouTube2.png" class="icon"> Subscribe on YouTube
+        		</a>
+    			`;
+
+    		const cryptoTemplate = (btc, eth, sol, ltc) => `
+        		<img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="icon"> BTC: $${btc} |
+        		<img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="icon"> ETH: $${eth} |
+        		<img src="https://cryptologos.cc/logos/solana-sol-logo.png" class="icon"> SOL: $${sol} |
+        		<img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png" class="icon"> LTC: $${ltc}
+    			`;
+
+    		let currentBatch = "social"; // Track which batch is showing
+
+    		// Function to fetch cryptocurrency prices
+    		async function fetchCryptoPrices() {
+        		try {
+            		let response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,litecoin&vs_currencies=usd');
+            		let data = await response.json();
+
+            	return cryptoTemplate(
+                	data.bitcoin.usd.toLocaleString(),
+                	data.ethereum.usd.toLocaleString(),
+                	data.solana.usd.toLocaleString(),
+                	data.litecoin.usd.toLocaleString()
+            		);
+       		} catch (error) {
+            		console.error("Error fetching crypto prices:", error);
+            		return "Error loading prices...";
+        		}
+    		}
+
+    	
+		// Function to update the marquee content
+    			async function updateMarquee() {
+        		const marquee = document.getElementById("marqueeText");
+
+        	if (currentBatch === "social") {
+            		marquee.innerHTML = socialLinks;
+            		currentBatch = "crypto";
+        	} else {
+            		marquee.innerHTML = await fetchCryptoPrices();
+            		currentBatch = "social";
+        	}
+
+        		marquee.style.animation = "none"; // Reset animation
+        		void marquee.offsetWidth; // Trigger reflow
+        		marquee.style.animation = "marquee 20s linear infinite"; // Restart animation
+    		}
+
+    		// Start the scrolling process when the page loads
+    			window.addEventListener('load', () => {
+        		updateMarquee(); // Initial batch (social links)
+        
+        	// Loop through alternating batches
+        		setInterval(async () => {
+            		await updateMarquee(); // Wait for the current batch to finish
+        		}, 20000); // Adjust to match the time duration of the scroll (20 seconds)
+    			});
+	</script>
+
+<div class="fixed-buttons2">
+    <a href="index.html">
+        <img src="assets/AaronJay.png" alt="Home" class="profile-image">
+    </a>
+</div>
+
+    <div class="container">
+        <!-- ✅ Table of Contents -->
+        <h1>Legal Information</h1>
+        <p>Last Updated: March 22, 2025</p>
+        <ul class="toc">
+            <li><a href="#disclaimer">Disclaimer</a></li>
+            <li><a href="#privacy-policy">Privacy Policy</a></li>
+            <li><a href="#cookie-policy">Cookie Policy</a></li>
+	    <li><a href="#contact-us">Contact Us</a></li>
+        </ul>
+
+        <!-- ✅ Disclaimer Section -->
+        <section id="disclaimer">
+            <h2>Disclaimer</h2>
+            <h3>Educational and Informational Purposes</h3>
+            <p>The content provided on this website and during our streams is for <b>Educational and Informational Purposes only</b>. We do not encourage gambling and strongly advise viewers to gamble responsibly.</p>
+
+            <h3>Personal Responsibility</h3>
+            <p>By accessing our content, you acknowledge that you are solely responsible for any actions you take related to gambling. <b>We do not provide financial or betting advice</b>. Please ensure you understand the risks before gambling.</p>
+
+            <h3>Advertisements on Our Website</h3>
+            <p>Our website may feature advertisements, sponsorships, and affiliate links. We may receive a commission for promoting certain casinos, but this does not mean we endorse or take responsibility for their services. Always review the terms and conditions of any platform before registering or depositing funds.</p>
+
+            <h3>External Links</h3>
+            <p>Our website may contain links to third-party websites. We do not operate these external sites and are not responsible for their content, security, or policies. We advise you to review their terms and conditions before engaging with them.</p>
+
+            <h3>Minors</h3>
+            <p>This website and our content are <b>strictly intended for individuals 18 years or older</b> (or the legal gambling age in your jurisdiction). If you are underage, please exit this website immediately. We do not knowingly collect data from minors.</p>
+        </section>
+
+        <!-- ✅ Privacy Policy Section -->
+        <section id="privacy-policy">
+            <h2>Privacy Policy</h2>
+            <h3>1. Information We Collect</h3>
+            <p>We may collect personal information such as your <b>Name, Email, Discord, and browsing activity</b> to improve our services.</p>
+
+            <h3>2. How We Use Your Data</h3>
+            <p>Your data is used to enhance your experience, provide customer support, and comply with legal requirements. We do not sell your personal data.</p>
+
+            <h3>3. Third-Party Services</h3>
+            <p>We may use third-party services, such as analytics tools and advertisers, that collect their own data. These services operate independently, and we are not responsible for their privacy policies.</p>
+
+            <h3>4. Your Rights</h3>
+            <p>You have the right to request access, modification, or deletion of your data. If you wish to do so, please contact us.</p>
+        </section>
+
+        <!-- ✅ Cookie Policy Section -->
+        <section id="cookie-policy">
+            <h2>Cookie Policy</h2>
+            <h3>1. What Are Cookies?</h3>
+            <p>Cookies are small files stored on your device that help us analyze website traffic and enhance your experience.</p>
+
+            <h3>2. How We Use Cookies</h3>
+            <p>We use cookies to track user activity, personalize content, and improve site performance.</p>
+
+            <h3>3. Managing Cookies</h3>
+            <p>You can manage or disable cookies through your browser settings. However, disabling cookies may affect website functionality.</p>
+        </section>
+
+	<section id="contact-us">
+    	    <h2>Contact Us</h2>
+    	    <p>If you have any questions or need support, please visit our <a href="support.html" style="color: #28a745; text-decoration: none; font-weight: bold;">Support Page</a>.</p>
+	    </section>
+
+        <!-- ✅ Back to Top -->
+        <p class="back-to-top"><a href="#">Back to Top</a></p>
+    </div>
+
+</body>
+
+
+<style>
+  footer {
+    	text-align: center;
+    	margin-top: 0;
+    	padding: 1px 0;
+    	background: rgba(34, 34, 34, 0.9);
+    	color: #fff;
+    	font-size: 14px; !important;
+    	border-top: 1px solid #00AEEF;
+    	white-space: nowrap;
+    	height: auto;
+    	position: relative;
+    	bottom: -20px;
+    	left: 0;
+    	width: 100vw; /* Full viewport width */
+    	min-width: 100%; /* Ensure no gaps */
+    }
+
+
+ footer a {
+    	color: #00AEEF;
+    	text-decoration: none;
+    }
+
+ footer a:hover {
+    	text-decoration: underline;
+    }
+
+ footer p {
+    	margin: 0 5px; /* Adds a small space between elements */
+    	margin-left: 0;
+    }
+
+		/* ✅ Mobile-Friendly Footer */
+		@media (max-width: 768px) {
+    		footer {
+        		font-size: 14px; /* Adjust font size */
+        		padding: 5px 0; /* Reduce padding */
+        		text-align: center;
+        		white-space: normal; /* Allow text wrapping */
+        		width: 100%; /* Ensures it spans full width */
+        		min-width: 100%;
+        		position: relative;
+        		bottom: -0;
+        		left: 0; /* Remove offset */
+        		background: rgba(34, 34, 34, 0.95); /* Slightly darker for readability */
+    		}
+
+    		footer p {
+        		margin: 0px 0; /* Add spacing */
+        		font-size: 12px; /* Slightly smaller text */
+    		}
+
+    		footer a {
+        		display: inline-block;
+        		font-size: 12px; /* Readable size */
+       			margin: 0 5px; /* Add small spacing */ }
+		}
+
+</style>
+<footer>
+	<p>&copy; 2025 𝐀𝐚𝐫𝐨𝐧𝐉𝐚𝐲𝐒𝐩𝐢𝐧𝐳.𝐜𝐨𝐦. All rights reserved.</p>
+    	<p><a href="policy.html#disclaimer">Terms of Service</a> | <a href="policy.html#privacy-policy">Privacy Policy</a></p>
+</footer>
+
+
+</html>

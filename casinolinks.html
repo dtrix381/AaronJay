@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    		<title>Aaron Jay</title>
+    		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    		<link rel="stylesheet" href="styles.css"> <!-- Link to your global styles -->
+	<style>
+       		body {
+	    		background: url('assets/casino-background.gif') no-repeat center center fixed;
+	   		background-size: cover;
+	    		background-color: black; /* Fallback color if the image doesn't load */
+	    		color: white;
+	    		height: 100%; /* Ensure full height */
+    			min-height: 100vh; /* Ensure full viewport height */
+			margin: 0;
+	    		padding: 0;
+			display: flex;
+    			justify-content: center;  /* Centers horizontally */
+    			align-items: center;
+			min-height: 100vh;
+		}
+	
+    		@media (max-width: 768px) { 
+    		body {
+        		background: url('assets/casino-background.gif') no-repeat;
+        		background-size: auto 100vh; /* Ensures full height */
+        		background-color: black; /* Fallback color */
+        		background-repeat: repeat-y; /* Enables vertical repeat */
+        		animation: backgroundLoop 15s linear infinite; /* Animation duration */
+    			flex-direction: column; /* Stack content from top to bottom */
+			overflow-x: hidden; /* Prevents any horizontal scrolling */
+		}
+		
+		html, body {
+    			height: 100%;
+    			margin: 0;
+    			padding: 0;
+    			display: flex;
+    			flex-direction: column;
+		}
+
+		/* Make main content fill the available space */
+		.main-content {
+    			flex: 1; /* This pushes the footer to the bottom */
+		}
+
+		
+   	 	@keyframes backgroundLoop {
+        		0% { background-position: 100% center; }
+        		50% { background-position: 0% center; }
+        		100% { background-position: 100% center; } }
+		}
+		
+		/* Arcticbets Color */
+        	:root {
+            		--arctic-blue: #00AEEF; /* Arcticbets logo blue */
+            		--border-color: #FFD700; /* Gold border color */
+        	}
+		/* ✅ Responsive Casino Container */
+		.casino-container {
+    			position: relative;
+    			margin: 50px auto; 
+    			width: 100%;
+			max-width: 500px;
+    			padding: 20px;
+    			border-radius: 10px;
+    			background-color: rgba(34, 34, 34, 0.9);
+    			box-shadow: 0 0 20px rgba(0, 174, 239, 0.8);
+    			text-align: center;
+			margin-top: 650px;
+		}
+
+		/* ✅ Flashing Border */
+		.casino-container::before {
+    			content: "";
+    			position: absolute;
+    			top: -10px;
+    			left: -10px;
+    			right: -10px;
+    			bottom: -10px;
+    			border-radius: 15px;
+    			border: 10px solid transparent;
+    			background: linear-gradient(45deg, #00AEEF, #ff00ff, #ffcc00, #ff4500, #00AEEF);
+    			background-size: 400% 400%;
+    			animation: border-flush 2s infinite linear;
+    			z-index: -1;
+		}
+
+		* ✅ Responsive Casino Logo */
+		.casino-logo {
+    			max-width: 300px;	
+		}
+
+		/* ✅ Faster Flashing Effect */
+		@keyframes border-flush {
+    			0% { background-position: 0% 50%; }
+    			50% { background-position: 100% 50%; }
+    			100% { background-position: 0% 50%; }
+		}
+
+		/* ✅ Highlighted Code Box */
+		.code-box {
+   			display: inline-block;
+    			padding: 8px 15px;
+    			border-radius: 5px;
+    			background: rgba(255, 255, 255, 0.2);
+    			border: 2px solid #FFD700;
+    			font-weight: bold;
+    			font-size: 1.2rem;
+		}
+
+		.code-box .highlight {
+    			color: #FFD700;
+    			font-size: 1.4rem;
+    			text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+		}
+
+		/* ✅ Mobile Styles */
+		@media (max-width: 768px) {
+    		.casino-container {
+        		width: 55%; /* Even wider on small screens */
+        		padding: 5px; /* Less padding */
+    		}
+
+    		.casino-logo {
+        		max-width: 170px; /* Smaller for mobile */
+    		}
+
+    		.code-box {
+        		font-size: 0.6rem;
+        		padding: 3px 5px;
+    		}
+
+    		.code-box .highlight {
+        		font-size: 1rem; }
+		}
+
+        	/* Bonus Box Styles */
+        	.bonus-box-container {
+            		display: flex;
+            		justify-content: center;
+            		gap: 20px;
+            		flex-wrap: wrap;
+            		margin-top: 50px;
+        	}
+
+        	.bonus-box {
+            		border: 3px solid var(--border-color);
+            		padding: 15px;
+            		margin: 10px;
+            		width: 250px;
+            		border-radius: 10px;
+            		background-color: rgba(0, 0, 0, 0.7);
+            		color: white;
+            		box-shadow: 0 0 10px var(--border-color);
+        	}
+
+        	.bonus-box h3 {
+            		font-size: 22px;
+            		margin-bottom: 10px;
+        	}
+
+        	.bonus-box p {
+            		margin: 5px 0;
+            		font-size: 16px;
+        	}
+
+        	.bonus-box .bonus-header {
+            		font-weight: bold;
+            		font-size: 24px;
+            		text-align: center;
+            		margin-bottom: 10px;
+        	}
+
+        	.bonus-box .bonus-details {
+            		display: flex;
+            		justify-content: space-between;
+            		margin-top: 10px;
+            		font-size: 16px;
+        	}
+
+        	.bonus-box .button-redeem {
+            		background-color: var(--arctic-blue);
+            		padding: 8px 15px;
+            		border-radius: 5px;
+            		color: black;
+            		font-weight: bold;
+            		text-decoration: none;
+            		display: block;
+            		text-align: center;
+            		margin-top: 15px;
+            		transition: all 0.3s ease;
+        	}
+
+        	.bonus-box .button-redeem:hover {
+            		background-color: #FFD700;
+            		color: black;
+            		box-shadow: 0 0 15px #FFD700;
+        	}
+        	
+
+		/* Mobile-Friendly Bonus Box Styles */
+		@media (max-width: 768px) {
+    			.bonus-box-container {
+        		flex-direction: column; /* Stack boxes vertically */
+        		align-items: center; /* Center them */
+        		gap: 10px; /* Reduce spacing */
+    		}
+
+    		.bonus-box {
+        		width: 60%; /* Make it fill most of the screen */
+        		padding: 5px;
+        		margin: 5px 0;
+        		font-size: 14px; /* Reduce font size slightly */
+    		}
+
+    		.bonus-box h3 {
+        		font-size: 18px;
+    		}
+
+    		.bonus-box p {
+        		font-size: 14px;
+    		}
+
+    		.bonus-box .button-redeem {
+        		font-size: 14px;
+        		padding: 6px 10px; }
+		}
+
+
+		body {
+            		font-family: Arial, sans-serif;
+            		margin: 20px;
+            		text-align: center;
+        	}
+	
+		.calculator-container {
+            		max-width: 400px;
+            		margin: auto;
+        	}
+        
+		input{
+            		margin: 10px 0;
+            		padding: 10px;
+            		width: 100%;
+        	}
+        	
+	</style>
+
+</head>
+
+<body>
+	<div class="main-content">
+	
+<!-- Marquee Box -->
+	<div class="marquee-container">
+    	<div class="marquee-content" id="marqueeText"></div>
+	</div>
+
+
+	<script>
+    		const socialLinks = `
+        		<a href="https://kick.com/aaron_jay" target="_blank">
+            		<img src="assets/Kick2.png" alt="Kick" width="20">Watch Live on Kick
+        		</a> |
+        		<a href="https://discord.gg/zj8rQeBHvm" target="_blank">
+            		<img src="assets/Discord2.png" class="icon">Join Discord Community 
+        		</a> |
+        		<a href="https://x.com/AaronJaySpinz" target="_blank">
+            		<img src="assets/Twitter2.png" class="icon">Follow me on Twitter
+        		</a> |
+        		<a href="https://www.youtube.com/@Aaronjayspinz" target="_blank">
+            		<img src="assets/YouTube2.png" class="icon">Subscribe on YouTube
+        		</a>
+    			`;
+
+    		const cryptoTemplate = (btc, eth, sol, ltc) => `
+        		<img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="icon"> BTC: $${btc} |
+        		<img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="icon"> ETH: $${eth} |
+        		<img src="https://cryptologos.cc/logos/solana-sol-logo.png" class="icon"> SOL: $${sol} |
+        		<img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png" class="icon"> LTC: $${ltc}
+    			`;
+
+    		let currentBatch = "social"; // Track which batch is showing
+
+    		// Function to fetch cryptocurrency prices
+    		async function fetchCryptoPrices() {
+        		try {
+            		let response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,litecoin&vs_currencies=usd');
+            		let data = await response.json();
+
+            	return cryptoTemplate(
+                	data.bitcoin.usd.toLocaleString(),
+                	data.ethereum.usd.toLocaleString(),
+                	data.solana.usd.toLocaleString(),
+                	data.litecoin.usd.toLocaleString()
+            		);
+       		} catch (error) {
+            		console.error("Error fetching crypto prices:", error);
+            		return "Error loading prices...";
+        		}
+    		}
+
+    	
+		// Function to update the marquee content
+    			async function updateMarquee() {
+        		const marquee = document.getElementById("marqueeText");
+
+        	if (currentBatch === "social") {
+            		marquee.innerHTML = socialLinks;
+            		currentBatch = "crypto";
+        	} else {
+            		marquee.innerHTML = await fetchCryptoPrices();
+            		currentBatch = "social";
+        	}
+
+        		marquee.style.animation = "none"; // Reset animation
+        		void marquee.offsetWidth; // Trigger reflow
+        		marquee.style.animation = "marquee 20s linear infinite"; // Restart animation
+    		}
+
+    		// Start the scrolling process when the page loads
+    			window.addEventListener('load', () => {
+        		updateMarquee(); // Initial batch (social links)
+        
+        	// Loop through alternating batches
+        		setInterval(async () => {
+            		await updateMarquee(); // Wait for the current batch to finish
+        		}, 20000); // Adjust to match the time duration of the scroll (20 seconds)
+    			});
+	</script>
+
+
+<button id="menu-toggle" class="menu-button">Hide Menu</button>
+
+	<div class="fixed-buttons">
+    		<a href="index.html">𝗛𝗼𝗺𝗲</a>
+    		<a href="deposit-event.html">𝗔𝗿𝗰𝘁𝗶𝗰𝗕𝗲𝘁𝘀 𝗗𝗲𝗽𝗼𝘀𝗶𝘁 𝗘𝘃𝗲𝗻𝘁𝘀</a>
+    		<a href="leaderboard.html">𝗟𝗲𝗮𝗱𝗲𝗿𝗯𝗼𝗮𝗿𝗱</a>
+    		<a href="support.html">𝗖𝗼𝗻𝘁𝗮𝗰𝘁 𝗦𝘂𝗽𝗽𝗼𝗿𝘁</a>
+    		<a href="policy.html">𝗣𝗿𝗶𝘃𝗮𝗰𝘆 𝗣𝗼𝗹𝗶𝗰𝘆</a>
+	</div>
+
+	<script>
+    		document.addEventListener("DOMContentLoaded", function () {
+        	const menuButton = document.getElementById("menu-toggle");
+        	const menu = document.querySelector(".fixed-buttons");
+
+        	// Ensure the menu is always visible at the start
+        		menu.style.display = "block";
+        		menuButton.textContent = "Menu"; // Default button text
+
+        	menuButton.addEventListener("click", function () {
+            	if (menu.style.display === "none") {
+                	menu.style.display = "block";
+                	menuButton.textContent = "Hide ☰";
+            	} else {
+                	menu.style.display = "none";
+                	menuButton.textContent = "Show ☰";
+            	}
+        	});
+    		});
+	</script>
+
+<!-- Casino Links Section -->
+<div class="casino-container">
+    <img src="assets/ArcticbetsLogo.webp" alt="Arcticbets Logo" class="casino-logo">
+    <p><a href="https://arcticbets.com/?i=aaron" class="casino-link" target="_blank" rel="noopener noreferrer">Create Account Now</a></p>
+    <p class="code-box">Use the Code: <span class="highlight">aaron</span></p>
+</div>
+
+<!-- Bonus Box Section with 4 boxes -->
+<div class="bonus-box-container">
+    <!-- Box 1 -->
+    <div class="bonus-box">
+        <div class="bonus-header">ʙᴏɴᴜs</div>
+        <div style="color: #FF4500;"><strong>200% up to $2000</strong></div>
+        <hr style="border-color: var(--border-color);">
+        
+        <div class="bonus-details">
+            <span>Max Bonus:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">$2,000.00</span>
+        </div>
+        <div class="bonus-details">
+            <span>Max Cashout:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">40x</span>
+        </div>
+        <div class="bonus-details">
+            <span>Wager:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">35x</span>
+        </div>
+        <div class="bonus-details">
+            <span>Min Deposit:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">$15.00</span>
+        </div>
+        
+        <a href="https://arcticbets.com/en/profile/bonus/bonus" class="button-redeem" target="_blank" rel="noopener noreferrer">REDEEM BONUS</a>
+</div>
+
+    <!-- Box 2 -->
+    <div class="bonus-box">
+        <div class="bonus-header">ᴡᴇʟᴄᴏᴍᴇ ʙᴏɴᴜs</div>
+        <div style="color: #FF4500;"><strong>500% up to $5000</strong></div>
+	<hr style="border-color: var(--border-color);">
+        
+        <div class="bonus-details">
+            <span>Max Bonus:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">$5,000.00</span>
+        </div>
+        <div class="bonus-details">
+            <span>Max Cashout:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">50x</span>
+        </div>
+        <div class="bonus-details">
+            <span>Wager:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">25x</span>
+        </div>
+        <div class="bonus-details">
+            <span>Min Deposit:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">$30.00</span>
+        </div>
+        
+        <a href="https://arcticbets.com/en/profile/bonus/bonus" class="button-redeem" target="_blank" rel="noopener noreferrer">REDEEM BONUS</a>
+</div>
+
+    <!-- Box 3 -->
+    <div class="bonus-box">
+        <div class="bonus-header">ʀᴇʟᴏᴀᴅ ʙᴏɴᴜs</div>
+        <div style="color: #FF4500;"><strong>400% up to $5000</strong></div>
+	<hr style="border-color: var(--border-color);">
+        
+        <div class="bonus-details">
+            <span>Max Bonus:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">$5,000.00</span>
+        </div>
+        <div class="bonus-details">
+            <span>Max Cashout:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">50x</span>
+        </div>
+        <div class="bonus-details">
+            <span>Wager:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">30x</span>
+        </div>
+        <div class="bonus-details">
+            <span>Min Deposit:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">$15.00</span>
+        </div>
+        
+        <a href="https://arcticbets.com/en/profile/bonus/bonus" class="button-redeem" target="_blank" rel="noopener noreferrer">REDEEM BONUS</a>
+</div>
+
+    <!-- Box 4 -->
+    <div class="bonus-box">
+        <div class="bonus-header">ʀᴇʟᴏᴀᴅ ʙᴏɴᴜs</div>
+        <div style="color: #FF4500;"><strong>350% up to $5000</strong></div>
+	<hr style="border-color: var(--border-color);">
+        
+        <div class="bonus-details">
+            <span>Max Bonus:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">$5,000.00</span>
+        </div>
+        <div class="bonus-details">
+            <span>Max Cashout:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">50x</span>
+        </div>
+        <div class="bonus-details">
+            <span>Wager:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">30x</span>
+        </div>
+        <div class="bonus-details">
+            <span>Min Deposit:</span><span style="font-family: 'Courier New', Courier, monospace; color: #FFFF00;">$20.00</span>
+        </div>
+        
+        <a href="https://arcticbets.com/en/profile/bonus/bonus" class="button-redeem" target="_blank" rel="noopener noreferrer">REDEEM BONUS</a>
+</div>
+
+</div>
+
+<!-- Animated Calculator Box -->
+<div class="calculator-box">
+    <h2>Bonus Deposit & Wagering Calculator</h2>
+    <div class="calculator-container">
+        <label for="deposit">Deposit Amount:</label>
+        <input type="text" id="deposit" placeholder="Enter deposit amount" oninput="formatDeposit()" onblur="validateDeposit()">
+
+        <label for="bonus">Bonus Percentage:</label>
+        <input type="text" id="bonus" placeholder="Enter bonus %" oninput="formatBonus()" onblur="validateBonus()">
+
+        <label for="wagering">Wagering Requirement (x):</label>
+        <input type="number" id="wagering" placeholder="Enter wagering x" oninput="calculate()">
+
+        <h3>Results:</h3>
+        <p><strong>Total Bonus:</strong> <span id="totalBonus">$0.00</span></p>
+        <p><strong>Total Balance:</strong> <span id="totalBalance">$0.00</span></p>
+        <p><strong>Wagering Needed:</strong> <span id="totalWager" class="highlight-result">$0.00</span></p>
+    </div>
+</div>
+
+<style>
+    :root {
+        --arctic-blue: #00e1ff;
+        --highlight-color: #ffcc00;
+    }
+
+    .calculator-box {
+        position: relative;
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: rgba(34, 34, 34, 0.95);
+        box-shadow: 0 0 15px var(--arctic-blue);
+        border: 3px solid var(--arctic-blue);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .calculator-box:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 25px var(--arctic-blue);
+    }
+
+    .calculator-container {
+        text-align: center;
+        color: white;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        font-size: 18px;
+        text-align: center;
+        border: 2px solid var(--arctic-blue);
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        box-shadow: 0 0 10px var(--arctic-blue);
+    }
+
+    p {
+        font-size: 18px;
+    }
+
+    .highlight-result {
+        color: var(--highlight-color);
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+ /* Responsive Styles */
+    @media (max-width: 480px) {
+        .calculator-box {
+            width: 95%;
+            padding: 15px;
+        }
+
+        h2 {
+            font-size: 18px;
+        }
+
+        label {
+            font-size: 12px;
+        }
+
+        input {
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        p {
+            font-size: 14px;
+        }
+
+        .highlight-result {
+            font-size: 16px;
+        }
+    }
+</style>
+
+<script>
+    function calculate() {
+        let deposit = parseFloat(document.getElementById("deposit").value.replace(/[^0-9.]/g, '')) || 0;
+        let bonusPercent = parseFloat(document.getElementById("bonus").value.replace(/[^0-9.]/g, '')) || 0;
+        let wageringReq = parseFloat(document.getElementById("wagering").value) || 0;
+
+        let totalBonus = (deposit * bonusPercent) / 100;
+        let totalBalance = deposit + totalBonus;
+        let totalWager = totalBalance * wageringReq;
+
+        let formatCurrency = (amount) => `$` + amount.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        document.getElementById("totalBonus").textContent = formatCurrency(totalBonus);
+        document.getElementById("totalBalance").textContent = formatCurrency(totalBalance);
+        document.getElementById("totalWager").textContent = formatCurrency(totalWager);
+    }
+
+    function formatDeposit() {
+        let depositInput = document.getElementById("deposit");
+        let value = depositInput.value.replace(/[^0-9.]/g, '');  // Remove non-numeric characters except "."
+
+        if (value) {
+            depositInput.value = `$` + value;
+        }
+        calculate();
+    }
+
+    function validateDeposit() {
+        let depositInput = document.getElementById("deposit");
+        let value = depositInput.value.replace(/[^0-9.]/g, '');
+        depositInput.value = value ? `$` + parseFloat(value).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : "";
+    }
+
+    function formatBonus() {
+        let bonusInput = document.getElementById("bonus");
+        let value = bonusInput.value.replace(/[^0-9.]/g, '');
+
+        if (value) {
+            bonusInput.value = value + `%`;
+        }
+        calculate();
+    }
+
+    function validateBonus() {
+        let bonusInput = document.getElementById("bonus");
+        let value = bonusInput.value.replace(/[^0-9.]/g, '');
+        bonusInput.value = value ? value + `%` : "";
+    }
+</script>
+
+</div>
+</body>
+
+<style>
+  footer {
+    	text-align: center;
+    	margin-top: 0;
+    	padding: 1px 0;
+    	background: rgba(34, 34, 34, 0.9);
+    	color: #fff;
+    	font-size: 10px; !important;
+    	border-top: 1px solid #00AEEF;
+    	white-space: nowrap;
+    	height: auto;
+    	position: relative;
+    	bottom: -20px;
+    	left: ;
+    	width: 100vw; /* Full viewport width */
+    	min-width: 100%; /* Ensure no gaps */
+    }
+
+
+ footer a {
+    	color: #00AEEF;
+    	text-decoration: none;
+    }
+
+ footer a:hover {
+    	text-decoration: underline;
+    }
+
+ footer p {
+    	margin: 0 5px; /* Adds a small space between elements */
+    	margin-left: 0;
+    }
+
+		/* ✅ Mobile-Friendly Footer */
+		@media (max-width: 768px) {
+    		footer {
+        		font-size: 12px; /* Adjust font size */
+        		padding: 5px 0; /* Reduce padding */
+        		text-align: center;
+        		white-space: normal; /* Allow text wrapping */
+        		width: 100%; /* Ensures it spans full width */
+        		min-width: 100%;
+        		position: relative;
+        		bottom: 0;
+        		left: 0; /* Remove offset */
+        		background: rgba(34, 34, 34, 0.95); /* Slightly darker for readability */
+    		}
+
+    		footer p {
+        		margin: 0px 0; /* Add spacing */
+        		font-size: 10px; /* Slightly smaller text */
+    		}
+
+    		footer a {
+        		display: inline-block;
+        		font-size: 10px; /* Readable size */
+       			margin: 0 5px; /* Add small spacing */ }
+		}
+
+</style>
+<footer>
+	<p>&copy; 2025 𝐀𝐚𝐫𝐨𝐧𝐉𝐚𝐲𝐒𝐩𝐢𝐧𝐳.𝐜𝐨𝐦. All rights reserved.</p>
+    	<p><a href="policy.html#disclaimer">Terms of Service</a> | <a href="policy.html#privacy-policy">Privacy Policy</a></p>
+</footer>
+
+
+</html>

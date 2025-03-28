@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    		<title>Aaron Jay</title>
+    		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    		<link rel="stylesheet" href="styles.css"> <!-- Link to your global styles -->
+	<style>
+       		body {
+	    		background: url('assets/casino-background.gif') no-repeat center center fixed;
+	   		background-size: cover;
+	    		background-color: black; /* Fallback color if the image doesn't load */
+	    		color: white;
+	    		margin: 0;
+	    		padding: 0;
+	    		min-height: 100vh; /* Ensures full viewport height */
+		}
+	
+    		@media (max-width: 768px) { 
+    		body {
+        		background: url('assets/casino-background.gif') no-repeat;
+        		background-size: auto 100vh; /* Ensures full height */
+        		background-color: black; /* Fallback color */
+        		background-repeat: repeat-y; /* Enables vertical repeat */
+        		animation: backgroundLoop 15s linear infinite; /* Animation duration */
+    		}
+
+   	 	@keyframes backgroundLoop {
+        		0% { background-position: 100% center; }
+        		50% { background-position: 0% center; }
+        		100% { background-position: 100% center; } }
+		}
+
+		.container {
+	    		margin-top: 70px;
+	    		max-width: 600px;
+        	}
+       		.leaderboard {
+	    		background: 7:49 pm 26/03/20257:49 pm 26/03/20257:49 pm 26/03/2025rgba(34, 34, 34, 0.8); /* Slight transparency */
+	   		backdrop-filter: blur(10px); /* Frosted glass effect */
+	    		border-radius: 15px;
+	    		padding: 20px;
+	    		box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); /* Golden glow */
+		}
+        	.leaderboard h2 {
+            		text-align: center;
+            		margin-bottom: 20px;
+        	}
+        	.event-details {
+            		background: #333;
+            		padding: 15px;
+            		border-radius: 10px;
+            		margin-bottom: 20px;
+        	}
+        	.event-rules {
+            		font-size: 14px;
+            		color: #bbb;
+        	}
+        	.rank-img {
+            		width: 40px;
+            		height: 40px;
+            		border-radius: 50%;
+            		margin-right: 10px;
+        	}
+		tbody tr:hover {
+	    		background-color: rgba(255, 255, 255, 0.1);
+	    		transition: 0.3s;
+		}
+		.depositors-title {
+	    		font-size: 28px; /* Larger font */
+	    		font-weight: bold;
+	    		text-align: center;
+	    		text-transform: uppercase;
+	    		background: linear-gradient(90deg, #FFD700, #FF8C00); /* Gold to Orange */
+	    		-webkit-background-clip: text;
+	    		-webkit-text-fill-color: transparent;
+	    		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+	    		padding: 10px 0;
+	    		letter-spacing: 2px;
+		}
+
+		
+		/* 📱 Mobile Adjustments */
+		@media (max-width: 768px) {
+    		.container {
+        		max-width: 90%; /* Adjust for smaller screens */
+        		margin-top: 60px;
+    		}
+
+    		.leaderboard {
+        		padding: 10px;
+    		}	
+
+    		.leaderboard h2 {
+        		font-size: 18px;
+    		}
+
+    		.event-details {
+        		padding: 10px;
+    		}
+
+    		.event-rules {
+        		font-size: 10px;
+    		}
+
+    		.rank-img {
+       		 	width: 25px;
+        		height: 25px;
+        		margin-right: 3px;
+    		}
+
+    		.depositors-title {
+        		font-size: 20px;
+        		letter-spacing: 1px;
+    		}
+
+    		tbody tr {
+        		font-size: 10px; /* Smaller text inside tables */ }
+		}
+
+		/* 📱 Mobile Adjustments */
+		@media (max-width: 768px) {
+    		iframe {
+        		width: 90%;  /* Make it responsive */
+        		height: 400px; /* Adjust height */ }
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="main-content">
+	
+<!-- Marquee Box -->
+	<div class="marquee-container">
+    	<div class="marquee-content" id="marqueeText"></div>
+	</div>
+
+
+	<script>
+    		const socialLinks = `
+        		<a href="https://kick.com/aaron_jay" target="_blank">
+            		<img src="assets/Kick2.png" alt="Kick" width="20">Watch Live on Kick
+        		</a> |
+        		<a href="https://discord.gg/zj8rQeBHvm" target="_blank">
+            		<img src="assets/Discord2.png" class="icon">Join Discord Community 
+        		</a> |
+        		<a href="https://x.com/AaronJaySpinz" target="_blank">
+            		<img src="assets/Twitter2.png" class="icon">Follow me on Twitter
+        		</a> |
+        		<a href="https://www.youtube.com/@Aaronjayspinz" target="_blank">
+            		<img src="assets/YouTube2.png" class="icon">Subscribe on YouTube
+        		</a>
+    			`;
+
+    		const cryptoTemplate = (btc, eth, sol, ltc) => `
+        		<img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="icon"> BTC: $${btc} |
+        		<img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="icon"> ETH: $${eth} |
+        		<img src="https://cryptologos.cc/logos/solana-sol-logo.png" class="icon"> SOL: $${sol} |
+        		<img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png" class="icon"> LTC: $${ltc}
+    			`;
+
+    		let currentBatch = "social"; // Track which batch is showing
+
+    		// Function to fetch cryptocurrency prices
+    		async function fetchCryptoPrices() {
+        		try {
+            		let response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana,litecoin&vs_currencies=usd');
+            		let data = await response.json();
+
+            	return cryptoTemplate(
+                	data.bitcoin.usd.toLocaleString(),
+                	data.ethereum.usd.toLocaleString(),
+                	data.solana.usd.toLocaleString(),
+                	data.litecoin.usd.toLocaleString()
+            		);
+       		} catch (error) {
+            		console.error("Error fetching crypto prices:", error);
+            		return "Error loading prices...";
+        		}
+    		}
+
+    	
+		// Function to update the marquee content
+    			async function updateMarquee() {
+        		const marquee = document.getElementById("marqueeText");
+
+        	if (currentBatch === "social") {
+            		marquee.innerHTML = socialLinks;
+            		currentBatch = "crypto";
+        	} else {
+            		marquee.innerHTML = await fetchCryptoPrices();
+            		currentBatch = "social";
+        	}
+
+        		marquee.style.animation = "none"; // Reset animation
+        		void marquee.offsetWidth; // Trigger reflow
+        		marquee.style.animation = "marquee 20s linear infinite"; // Restart animation
+    		}
+
+    		// Start the scrolling process when the page loads
+    			window.addEventListener('load', () => {
+        		updateMarquee(); // Initial batch (social links)
+        
+        	// Loop through alternating batches
+        		setInterval(async () => {
+            		await updateMarquee(); // Wait for the current batch to finish
+        		}, 20000); // Adjust to match the time duration of the scroll (20 seconds)
+    			});
+	</script>
+
+
+<button id="menu-toggle" class="menu-button">Hide Menu</button>
+
+	<div class="fixed-buttons">
+    		<a href="index.html">𝗛𝗼𝗺𝗲</a>
+    		<a href="casinolinks.html">𝗖𝗮𝘀𝗶𝗻𝗼 𝗟𝗶𝗻𝗸𝘀</a>
+    		<a href="leaderboard.html">𝗟𝗲𝗮𝗱𝗲𝗿𝗯𝗼𝗮𝗿𝗱</a>
+    		<a href="support.html">𝗖𝗼𝗻𝘁𝗮𝗰𝘁 𝗦𝘂𝗽𝗽𝗼𝗿𝘁</a>
+    		<a href="policy.html">𝗣𝗿𝗶𝘃𝗮𝗰𝘆 𝗣𝗼𝗹𝗶𝗰𝘆</a>
+	</div>
+
+	<script>
+    		document.addEventListener("DOMContentLoaded", function () {
+        	const menuButton = document.getElementById("menu-toggle");
+        	const menu = document.querySelector(".fixed-buttons");
+
+        	// Ensure the menu is always visible at the start
+        		menu.style.display = "block";
+        		menuButton.textContent = "Menu"; // Default button text
+
+        	menuButton.addEventListener("click", function () {
+            	if (menu.style.display === "none") {
+                	menu.style.display = "block";
+                	menuButton.textContent = "Hide ☰";
+            	} else {
+                	menu.style.display = "none";
+                	menuButton.textContent = "Show ☰";
+            	}
+        	});
+    		});
+	</script>
+
+
+    <!-- ArcticBets Deposit Event Leaderboard -->
+    <div class="container leaderboard">
+        <h2>🏆 ARCTICBETS DEPOSIT EVENT 🏆</h2>
+        
+        <div class="event-details">
+    <div class="d-flex justify-content-between">
+        <h4>Total Bonus Buy: <span class="text-success">$100.00</span></h4>
+        <h4>Total Deposit: <span class="text-warning">$579.03</span></h4>
+    </div>
+            <h5 class="mt-3">Event Rules</h5>
+            <ul class="event-rules">
+                <li>Minimum $20 Deposit</li>
+                <li>Open a Ticket and share proof of deposit</li>
+                <li>Submit a Slot of your choice (each $20 deposit = 1 slot entry)</li>
+                <li>We will spin the Wheel to pick which slot to Buy</li>
+                <li>You can withdraw funds, but a new deposit must match the previous withdrawal + $20 to count</li>
+                <li>Bonus Buy: $100 (Total win distributed to all depositors)</li>
+                <li>Payout: Based on your percentage of total deposits (higher deposit = higher share)</li>
+            </ul>
+        </div>
+
+        <table class="table table-dark">
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>Discord</th>
+            <th>Username</th>
+            <th>Share</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><span class="rank-badge gold">🥇</span></td>
+            <td> <div style="display: flex; align-items: center;">
+                <img src="https://cdn.discordapp.com/avatars/1265873964450840627/ec54aefaf6e206130184855aecdca73f.png" 
+             class="rank-img" 
+             style="width: 20px; height: 20px; margin-right: 5px;">
+                <a href="https://discord.com/users/1265873964450840627" target="_blank" style="text-decoration: none; font-weight: bold; color: inherit;">
+   			MC
+        	</a>
+            </td>
+            <td>MCwasHere</td>
+            <td>23.43%</td>
+        </tr>
+        <tr>
+    	    <td><span class="rank-badge silver">🥈</span></td>
+    	    <td> <div style="display: flex; align-items: center;">
+        	<img src="https://cdn.discordapp.com/avatars/516619018367402014/68bbcad5f4fda63fd25b1fc2a1b9cab3.png" 
+             class="rank-img" 
+             style="width: 20px; height: 20px; margin-right: 5px;">
+                <a href="https://discord.com/users/516619018367402014" target="_blank" style="text-decoration: none; font-weight: bold; color: inherit;">
+        		johnnancy
+        	</a>
+    	    </td>
+    	    <td>MonarchButterfly</td>
+    	    <td>17.67%</td>
+	</tr>
+	<tr>
+            <td><span class="rank-badge bronze">🥉</span></td>
+            <td> <div style="display: flex; align-items: center;">
+                <img src="https://cdn.discordapp.com/embed/avatars/4.png" 
+             class="rank-img" 
+             style="width: 20px; height: 20px; margin-right: 5px;">
+                <a href="https://discord.com/users/798462121972727829" target="_blank" style="text-decoration: none; font-weight: bold; color: inherit;">
+   			Parky2192
+        	</a>
+            </td>
+            <td>Parky2192</td>
+            <td>13.13%</td>
+        </tr>	<tr>
+            <td><span class="rank-badge">#4</span></td>
+            <td> <div style="display: flex; align-items: center;">
+                <img src="https://cdn.discordapp.com/avatars/897713991978209310/dec118e67baa63bd78e0ca725cf176dc.png" 
+             class="rank-img" 
+             style="width: 20px; height: 20px; margin-right: 5px;">
+                <a href="https://discord.com/users/897713991978209310" target="_blank" style="text-decoration: none; font-weight: bold; color: inherit;">
+   			saminftz
+        	</a>
+            </td>
+            <td>SamiSami</td>
+            <td>13.13%</td>
+        </tr>
+        <tr>
+    	    <td><span class="rank-badge">#5</span></td>
+    	    <td> <div style="display: flex; align-items: center;">
+            	<img src="https://cdn.discordapp.com/avatars/488015447417946151/19e7b770b91a24f3891e8646dc09d335.png" 
+             class="rank-img" 
+             style="width: 20px; height: 20px; margin-right: 5px;">
+            	<a href="https://discord.com/users/488015447417946151" target="_blank" 
+             style="text-decoration: none; font-weight: bold; color: inherit;">
+            		Dtrix
+        	</a>
+   	     </td>
+    	     <td>Geekvapes</td>
+    	     <td>11.69%</td>
+	</tr>
+        <tr>
+            <td><span class="rank-badge">#6</span></td>
+            <td> <div style="display: flex; align-items: center;">
+                <img src="https://cdn.discordapp.com/avatars/657584864463159308/36447d9df5373b7fe2b1f3e975110930.png" 
+             class="rank-img" 
+             style="width: 20px; height: 20px; margin-right: 5px;">
+            	<a href="https://discord.com/users/657584864463159308" target="_blank" style="text-decoration: none; font-weight: bold; color: inherit;">
+        		QueenZ
+        	</a>
+            </td>
+            <td>QueenZ</td>
+            <td>6.07%</td>
+        </tr>
+    <tr>
+            <td><span class="rank-badge">#7</span></td>
+            <td> <div style="display: flex; align-items: center;">
+                <img src="https://cdn.discordapp.com/avatars/530190686478270467/12831fdf1e799a2188a35322aa15e43e.png" 
+             class="rank-img" 
+             style="width: 20px; height: 20px; margin-right: 5px;">
+            	<a href="https://discord.com/users/530190686478270467" target="_blank" style="text-decoration: none; font-weight: bold; color: inherit;">
+        		mysticmethods
+        	</a>
+            </td>
+            <td>Mystic</td>
+            <td>3.51%</td>
+        </tr>
+     <tr>
+            <td><span class="rank-badge">#8</span></td>
+            <td> <div style="display: flex; align-items: center;">
+                <img src="https://cdn.discordapp.com/avatars/729762833406885989/b9314a8dbbf09cb3da1d9ce45b3979dc.png" 
+             class="rank-img" 
+             style="width: 20px; height: 20px; margin-right: 5px;">
+            	<a href="https://discord.com/users/729762833406885989" target="_blank" style="text-decoration: none; font-weight: bold; color: inherit;">
+        		Keshav3473
+        	</a>
+            </td>
+            <td>Keshav3473</td>
+            <td>3.01%</td>
+        </tr>
+     
+   <tr>
+            <td><span class="rank-badge">#9</span></td>
+            <td> <div style="display: flex; align-items: center;">
+                <img src="https://cdn.discordapp.com/avatars/1092352859858812960/94a53b8de732dca32464f69bfbf4fe8b.png" 
+             class="rank-img" 
+             style="width: 20px; height: 20px; margin-right: 5px;">
+            	<a href="https://discord.com/users/1092352859858812960" target="_blank" style="text-decoration: none; font-weight: bold; color: inherit;">
+        		JP_FLEX
+        	</a>
+            </td>
+            <td>JPFLEX</td>
+            <td>2.99%</td>
+        </tr>
+        <tr>
+            <td><span class="rank-badge">#10</span></td>
+            <td> <div style="display: flex; align-items: center;">
+                <img src="https://cdn.discordapp.com/avatars/750223061927591967/1017770eca3e5f4b618cd5b5230b4381.png" 
+             class="rank-img" 
+             style="width: 20px; height: 20px; margin-right: 5px;">
+            	<a href="https://discord.com/users/750223061927591967" target="_blank" style="text-decoration: none; font-weight: bold; color: inherit;">
+        		trw
+        	</a>
+            </td>
+            <td>trw11</td>
+            <td>2.98%</td>
+        </tr>
+        <tr>
+            <td><span class="rank-badge">#11</span></td>
+            <td> <div style="display: flex; align-items: center;">
+                <img src="https://cdn.discordapp.com/avatars/1180430692736315465/5a746265ceee2392a2735d6bfbe2c1ec.png" 
+             class="rank-img" 
+             style="width: 20px; height: 20px; margin-right: 5px;">
+            	<a href="https://discord.com/users/1180430692736315465" target="_blank" style="text-decoration: none; font-weight: bold; color: inherit;">
+        		Spotsnslots
+        	</a>
+            </td>
+            <td>SPOTSNSLOTS</td>
+            <td>2.40%</td>
+        </tr>
+    </tbody>
+</table>
+
+    </div>
+
+    <br><br>
+
+    <div style="text-align: center; margin-top: 20px;">
+    <h2 class="depositors-title">𝐃𝐞𝐩𝐨𝐬𝐢𝐭𝐨𝐫𝐬 𝐒𝐥𝐨𝐭!</h2>
+    <iframe src="https://wheelofnames.com/xv4-v6e" width="600" height="600" style="border: none;"></iframe>
+</div>
+</div>
+
+</body>
+
+<footer>
+	<p>&copy; 2025 𝐀𝐚𝐫𝐨𝐧𝐉𝐚𝐲𝐒𝐩𝐢𝐧𝐳.𝐜𝐨𝐦. All rights reserved.</p>
+    	<p><a href="policy.html#disclaimer">Terms of Service</a> | <a href="policy.html#privacy-policy">Privacy Policy</a></p>
+</footer>
+
+
+</html>
