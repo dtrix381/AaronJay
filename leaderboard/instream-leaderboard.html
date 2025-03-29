@@ -492,22 +492,34 @@
             overflow: hidden;
         }
 
-        .arrow {
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            color: white;
-            border-radius: 50%;
-            user-select: none;
-        }
+.arrow {
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffd700; /* Gold color */
+    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.8); /* Neon glow effect */
+    background: none;
+    border: none;
+    padding: 10px;
+    transition: transform 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+}
 
-        .arrow-left { left: -50px; }
-        .arrow-right { right: -50px; }
+.arrow:hover {
+    transform: translateY(-50%) scale(1.2);
+    text-shadow: 4px 4px 20px rgba(255, 215, 0, 1);
+}
+
+.arrow-left {
+    left: -50px;
+}
+
+.arrow-right {
+    right: -50px;
+}
+
 
         table {
             width: 100%;
