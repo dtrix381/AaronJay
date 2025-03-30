@@ -399,6 +399,126 @@
     100% { transform: translateY(0); }
 }
 
+@media (max-width: 768px) { 
+.giveaway-container {
+    position: relative;
+    margin-top: 200px; /* Reduced for better spacing on mobile */
+    width: 60%; /* Adjusts dynamically */
+    max-width: 300px; /* Limits size on larger screens */
+    padding: 15px;
+    border-radius: 15px;
+    background: linear-gradient(45deg, #4B0082, #1E90FF, #4B0082);
+    box-shadow: 0 0 20px rgba(30, 144, 255, 0.8);
+    animation: border-glow 2s infinite alternate ease-in-out;
+    text-align: center;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    left: 85px;
+    right: auto;
+}
+
+/* Border Animation */
+@keyframes border-glow {
+    0% { box-shadow: 0 0 15px rgba(30, 144, 255, 0.6); }
+    100% { box-shadow: 0 0 35px rgba(75, 0, 130, 1); }
+}
+
+/* Title Styling */
+.giveaway-title {
+    font-size: 17px; /* Adjusted for mobile */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    animation: fade-in 1.5s ease-in-out forwards;
+}
+
+/* Text Fade-in Effect */
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Prize Amount Styling */
+.giveaway-amount {
+    display: inline-block;
+    font-size: 24px; /* Adjusted for mobile */
+    font-weight: 800;
+    padding: 6px 12px;
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #00FFFF;
+    border-radius: 10px;
+    text-shadow: 2px 2px 6px rgba(0, 255, 255, 0.9);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect for Giveaway Amount */
+.giveaway-amount:hover {
+    transform: scale(1.05);
+}
+
+/* Black Text Border for "Total Prizes Given:" */
+.prize-text {
+    text-shadow: 
+        -1px -1px 0 black,  
+         1px -1px 0 black,  
+        -1px  1px 0 black,  
+         1px  1px 0 black;
+}
+
+/* Animated Prize Display ($ + Number Together) */
+.animated-prize {
+    display: inline-block;
+    font-size: 26px; /* Adjusted for mobile */
+    font-weight: 900;
+    color: #f5c308;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 1);
+    animation: pulse 1.5s infinite alternate ease-in-out;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.08); }
+}
+
+/* Subtle Floating Animation */
+.floating {
+    animation: floating 3s infinite ease-in-out;
+}
+
+@keyframes floating {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+    100% { transform: translateY(0); }
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .giveaway-container {
+        margin-top: 100px; /* Reduce spacing for smaller screens */
+        padding: 10px;
+        max-width: 90%;
+    }
+
+    .giveaway-title {
+        font-size: 20px;
+    }
+
+    .giveaway-amount {
+        font-size: 22px;
+        padding: 5px 10px;
+    }
+
+    .animated-prize {
+        font-size: 24px;}
+}
+}
+
 
 </style>
 
@@ -471,22 +591,33 @@
             overflow: hidden;
         }
 
-        .arrow {
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            color: white;
-            border-radius: 50%;
-            user-select: none;
-        }
+.arrow {
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffd700; /* Gold color */
+    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.8); /* Neon glow effect */
+    background: none;
+    border: none;
+    padding: 10px;
+    transition: transform 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+}
 
-        .arrow-left { left: -50px; }
-        .arrow-right { right: -50px; }
+.arrow:hover {
+    transform: translateY(-50%) scale(1.2);
+    text-shadow: 4px 4px 20px rgba(255, 215, 0, 1);
+}
+
+.arrow-left {
+    left: -25px;
+}
+
+.arrow-right {
+    right: -25px;
+}
 
         table {
             width: 100%;
@@ -532,6 +663,80 @@
             .arrow-right { right: -20px; }
             th, td { padding: 6px; font-size: 14px; }
         }
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .container {
+        max-width: 85%;
+        margin-left: auto;
+    }
+
+    .table-container {
+        padding: 5px;
+        border-radius: 10px;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 6px;
+    }
+
+    /* Adjust Arrows for Mobile */
+    .arrow {
+        font-size: 24px;
+        padding: 8px;
+    }
+
+    .arrow-left {
+        left: -15px; /* Move closer to the table */
+    }
+
+    .arrow-right {
+        right: -15px; /* Move closer to the table */
+    }
+}
+
+/* Smaller Screens (Phones) */
+@media (max-width: 480px) {
+    .table-container {
+        padding: 5px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    /* Ensure Table is Scrollable */
+    .table-container {
+        overflow-x: auto;
+        display: block;
+    }
+
+    /* Adjust Arrows for Phones */
+    .arrow {
+        font-size: 20px;
+        padding: 6px;
+    }
+
+    .arrow-left {
+        left: -10px; /* Move even closer */
+    }
+
+    .arrow-right {
+        right: -10px; /* Move even closer */
+    }
+}
+
+
+
+
     </style>
 </head>
 <body>
@@ -647,6 +852,67 @@ function nextLeaderboard() {
 
 
 </body>
+
+<style>
+  footer {
+    	text-align: center;
+    	margin-top: 0;
+    	padding: 1px 0;
+    	background: rgba(34, 34, 34, 0.9);
+    	color: #fff;
+    	font-size: 10px; !important;
+    	border-top: 1px solid #00AEEF;
+    	white-space: nowrap;
+    	height: auto;
+    	position: relative;
+    	bottom: -20px;
+    	left: 0;
+    	width: 100vw; /* Full viewport width */
+    	min-width: 100%; /* Ensure no gaps */
+    }
+
+
+ footer a {
+    	color: #00AEEF;
+    	text-decoration: none;
+    }
+
+ footer a:hover {
+    	text-decoration: underline;
+    }
+
+ footer p {
+    	margin: 0 5px; /* Adds a small space between elements */
+    	margin-left: 0;
+    }
+
+		/* ✅ Mobile-Friendly Footer */
+		@media (max-width: 768px) {
+    		footer {
+        		font-size: 12px; /* Adjust font size */
+        		padding: 5px 0; /* Reduce padding */
+        		text-align: center;
+        		white-space: normal; /* Allow text wrapping */
+        		width: 100%; /* Ensures it spans full width */
+        		min-width: 120%;
+        		position: relative;
+        		bottom: -20px;
+        		left: 0; /* Remove offset */
+        		background: rgba(34, 34, 34, 0.95); /* Slightly darker for readability */
+    		}
+
+    		footer p {
+        		margin: 0px 0; /* Add spacing */
+        		font-size: 10px; /* Slightly smaller text */
+    		}
+
+    		footer a {
+        		display: inline-block;
+        		font-size: 10px; /* Readable size */
+       			margin: 0 5px; /* Add small spacing */ }
+		}
+
+</style>
 <footer>
 	<p>&copy; 2025 𝐀𝐚𝐫𝐨𝐧𝐉𝐚𝐲𝐒𝐩𝐢𝐧𝐳.𝐜𝐨𝐦. All rights reserved.</p>
     	<p><a href="../policy.html#disclaimer">Terms of Service</a> | <a href="../policy.html#privacy-policy">Privacy Policy</a></p>
