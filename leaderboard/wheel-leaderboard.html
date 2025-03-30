@@ -23,7 +23,7 @@
 	
     		@media (max-width: 768px) { 
     		body {
-        		background: url('assets/casino-background.gif') no-repeat;
+        		background: url('../assets/casino-background.gif') no-repeat;
         		background-size: auto 100vh; /* Ensures full height */
         		background-color: black; /* Fallback color */
         		background-repeat: repeat-y; /* Enables vertical repeat */
@@ -405,10 +405,10 @@
     .giveaway-container {
         position: relative;
 	padding: 12px;
-        margin-top: 50px; /* Adjusts spacing for smaller screens */
+        margin-top: 150px; /* Adjusts spacing for smaller screens */
 	width: 60vw;
 	border-radius: 10px;
-	left: 50px;
+	left: 108px;
     }
     .giveaway-title {
         font-size: 16px;
@@ -492,22 +492,33 @@
             overflow: hidden;
         }
 
-        .arrow {
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            color: white;
-            border-radius: 50%;
-            user-select: none;
-        }
+.arrow {
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffd700; /* Gold color */
+    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.8); /* Neon glow effect */
+    background: none;
+    border: none;
+    padding: 10px;
+    transition: transform 0.2s ease-in-out, text-shadow 0.2s ease-in-out;
+}
 
-        .arrow-left { left: -50px; }
-        .arrow-right { right: -50px; }
+.arrow:hover {
+    transform: translateY(-50%) scale(1.2);
+    text-shadow: 4px 4px 20px rgba(255, 215, 0, 1);
+}
+
+.arrow-left {
+    left: -50px;
+}
+
+.arrow-right {
+    right: -50px;
+}
 
         table {
             width: 100%;
@@ -583,7 +594,7 @@
 
         table { min-width: 500px; } /* Ensures proper scrolling */
         
-        th, td { padding: 6px; font-size: 13px; }
+        th, td { padding: 5spx; font-size: 13px; }
     }
 </style>
 </head>
@@ -824,9 +835,9 @@ function nextLeaderboard() {
         		text-align: center;
         		white-space: normal; /* Allow text wrapping */
         		width: 100%; /* Ensures it spans full width */
-        		min-width: 100%;
+        		min-width: 120%;
         		position: relative;
-        		bottom: 0;
+        		bottom: -20px;
         		left: 0; /* Remove offset */
         		background: rgba(34, 34, 34, 0.95); /* Slightly darker for readability */
     		}
