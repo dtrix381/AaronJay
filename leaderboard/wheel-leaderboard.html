@@ -405,7 +405,7 @@
     .giveaway-container {
         position: relative;
 	padding: 12px;
-        margin-top: 150px; /* Adjusts spacing for smaller screens */
+        margin-top: 200px; /* Adjusts spacing for smaller screens */
 	width: 60vw;
 	border-radius: 10px;
 	left: 108px;
@@ -596,6 +596,41 @@
         
         th, td { padding: 5spx; font-size: 13px; }
     }
+
+/* Smaller Screens (Phones) */
+@media (max-width: 480px) {
+    .table-container {
+        padding: 5px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 5px;
+    }
+
+    /* Ensure Table is Scrollable */
+    .table-container {
+        overflow-x: auto;
+        display: block;
+    }
+
+    /* Adjust Arrows for Phones */
+    .arrow {
+        font-size: 20px;
+        padding: 6px;
+    }
+
+    .arrow-left {
+        left: -1px; /* Move even closer */
+    }
+
+    .arrow-right {
+        right: -1px; /* Move even closer */
+    }
+}
 </style>
 </head>
 <body>
