@@ -240,7 +240,7 @@
 
 <div class="fixed-buttons2">
     <a href="/AaronJay/">
-        <img src="assets/AaronJay.png" alt="Home" class="profile-image">
+        <img src="../assets/AaronJay.png" alt="Home" class="profile-image">
     </a>
 </div>
 
