@@ -5,10 +5,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
     		<title>Aaron Jay</title>
     		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    		<link rel="stylesheet" href="styles.css"> <!-- Link to your global styles -->
+    		<link rel="stylesheet" href="../styles.css"> <!-- Link to your global styles -->
 	<style>
        		body {
-	    		background: url('assets/casino-background.gif') no-repeat center center fixed;
+	    		background: url('../assets/casino-background.gif') no-repeat center center fixed;
 	   		background-size: cover;
 	    		background-color: black; /* Fallback color if the image doesn't load */
 	    		color: white;
@@ -24,7 +24,7 @@
 	
     		@media (max-width: 768px) { 
     		body {
-        		background: url('assets/casino-background.gif') no-repeat;
+        		background: url('../assets/casino-background.gif') no-repeat;
         		background-size: auto 100vh; /* Ensures full height */
         		background-color: black; /* Fallback color */
         		background-repeat: repeat-y; /* Enables vertical repeat */
@@ -198,24 +198,24 @@
 	<script>
     		const socialLinks = `
         		<a href="https://kick.com/aaron_jay" target="_blank">
-            		<img src="assets/Kick2.png" alt="Kick" width="20">Watch Live on Kick
+            		<img src="../assets/Kick2.png" alt="Kick" width="20">Watch Live on Kick
         		</a> |
         		<a href="https://discord.gg/zj8rQeBHvm" target="_blank">
-            		<img src="assets/Discord2.png" class="icon">Join Discord Community 
+            		<img src="../assets/Discord2.png" class="icon">Join Discord Community 
         		</a> |
         		<a href="https://x.com/AaronJaySpinz" target="_blank">
-            		<img src="assets/Twitter2.png" class="icon">Follow me on Twitter
+            		<img src="../assets/Twitter2.png" class="icon">Follow me on Twitter
         		</a> |
         		<a href="https://www.youtube.com/@Aaronjayspinz" target="_blank">
-            		<img src="assets/YouTube2.png" class="icon">Subscribe on YouTube
+            		<img src="../assets/YouTube2.png" class="icon">Subscribe on YouTube
         		</a>
     			`;
 
     		const cryptoTemplate = (btc, eth, sol, ltc) => `
-        		<img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" class="icon"> BTC: $${btc} |
-        		<img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" class="icon"> ETH: $${eth} |
-        		<img src="https://cryptologos.cc/logos/solana-sol-logo.png" class="icon"> SOL: $${sol} |
-        		<img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png" class="icon"> LTC: $${ltc}
+        		<img src="assets/BTC.png" alt="Kick" width="20"> BTC: $${btc} |
+        		<img src="assets/ETH.png" alt="Kick" width="20"> ETH: $${eth} |
+        		<img src="assets/SOL.png" alt="Kick" width="20"> SOL: $${sol} |
+        		<img src="assets/LTC.png" alt="Kick" width="20"> LTC: $${ltc}
     			`;
 
     		let currentBatch = "social"; // Track which batch is showing
@@ -270,11 +270,11 @@
 <button id="menu-toggle" class="menu-button">Hide Menu</button>
 
 	<div class="fixed-buttons">
-    		<a href="index.html">𝗛𝗼𝗺𝗲</a>
-		<a href="deposit-event.html">𝗔𝗿𝗰𝘁𝗶𝗰𝗕𝗲𝘁𝘀 𝗗𝗲𝗽𝗼𝘀𝗶𝘁 𝗘𝘃𝗲𝗻𝘁𝘀</a>
-    		<a href="casinolinks.html">𝗖𝗮𝘀𝗶𝗻𝗼 𝗟𝗶𝗻𝗸𝘀</a>
-    		<a href="support.html">𝗖𝗼𝗻𝘁𝗮𝗰𝘁 𝗦𝘂𝗽𝗽𝗼𝗿𝘁</a>
-    		<a href="policy.html">𝗣𝗿𝗶𝘃𝗮𝗰𝘆 𝗣𝗼𝗹𝗶𝗰𝘆</a>
+    		<a href="/AaronJay/">𝗛𝗼𝗺𝗲</a>
+		<a href="/AaronJay/deposit-event/">𝗔𝗿𝗰𝘁𝗶𝗰𝗕𝗲𝘁𝘀 𝗗𝗲𝗽𝗼𝘀𝗶𝘁 𝗘𝘃𝗲𝗻𝘁𝘀</a>
+    		<a href="/AaronJay/casinolinks/">𝗖𝗮𝘀𝗶𝗻𝗼 𝗟𝗶𝗻𝗸𝘀</a>
+    		<a href="/AaronJay/support/">𝗖𝗼𝗻𝘁𝗮𝗰𝘁 𝗦𝘂𝗽𝗽𝗼𝗿𝘁</a>
+    		<a href="/AaronJay/policy/">𝗣𝗿𝗶𝘃𝗮𝗰𝘆 𝗣𝗼𝗹𝗶𝗰𝘆</a>
 	</div>
 
 	<script>
@@ -318,7 +318,7 @@
        	    <p>𝗧𝗼𝘁𝗮𝗹 𝗥𝗮𝗻𝗱𝗼𝗺 𝗚𝗶𝘃𝗲𝗮𝘄𝗮𝘆 𝗛𝗼𝘀𝘁𝗲𝗱: <span style="color: gold;">𝟏𝟎</span></p>
 	    <p>𝐓𝐨𝐭𝐚𝐥 𝐈𝐧-𝐬𝐭𝐫𝐞𝐚𝐦 𝐏𝐫𝐢𝐳𝐞𝐬 𝐆𝐢𝐯𝐞𝐧: <span style="color: gold;">$𝟔𝟓.𝟎</span></p>
             <br>	
-            <p><a href="leaderboard/instream-leaderboard.html">Click Here to view the In-stream Leaderboard</a></p>
+            <p><a href="/AaronJay/leaderboard/instream-leaderboard/">Click Here to view the In-stream Leaderboard</a></p>
         </div>
         
         <!-- Best Slot Multipliers -->
@@ -329,7 +329,7 @@
        	    <p>𝐓𝐨𝐭𝐚𝐥 𝐖𝐚𝐠𝐞𝐫 𝐑𝐚𝐜𝐞'𝐬 𝐄𝐯𝐞𝐧𝐭: <span style="color: gold;">𝟐</span></p>
 	    <p>𝐓𝐨𝐭𝐚𝐥 𝐖𝐚𝐠𝐞𝐫 𝐏𝐫𝐢𝐳𝐞𝐬 𝐆𝐢𝐯𝐞𝐧: <span style="color: gold;">$𝟑𝟕𝟓.𝟎</span></p>
             <br>	
-            <p><a href="leaderboard/wager-leaderboard.html">Click Here to view the Wager Race Leaderboard</a></p>
+            <p><a href="/AaronJay/leaderboard/wager-leaderboard/">Click Here to view the Wager Race Leaderboard</a></p>
         </div>
         
         <!-- Most Tipped Viewers -->
@@ -340,7 +340,7 @@
        	    <p>𝐓𝐨𝐭𝐚𝐥 𝐁𝐨𝐧𝐮𝐬 𝐁𝐮𝐲 𝐇𝐨𝐬𝐭𝐞𝐝: <span style="color: gold;">𝟐𝟒</span></p>
 	    <p>𝐓𝐨𝐭𝐚𝐥 𝐖𝐡𝐞𝐞𝐥 𝐏𝐫𝐢𝐳𝐞𝐬 𝐆𝐢𝐯𝐞𝐧: <span style="color: gold;">$𝟔𝟎𝟖.𝟔𝟑</span></p>
             <br>	
-            <p><a href="leaderboard/wheel-leaderboard.html">Click Here to view the Wheel Leaderboard</a></p>
+            <p><a href="/AaronJay/leaderboard/wheel-leaderboard/">Click Here to view the Wheel Leaderboard</a></p>
         </div>
         
         <!-- In-Stream Prizes Leaderboard -->
@@ -351,7 +351,7 @@
        	    <p>𝐓𝐨𝐭𝐚𝐥 𝐆𝐢𝐯𝐞𝐚𝐰𝐚𝐲 𝐇𝐨𝐬𝐭𝐞𝐝: <span style="color: gold;">𝟑𝟔</span></p>
 	    <p>𝗧𝗼𝘁𝗮𝗹 𝗣𝗿𝗶𝘇𝗲𝘀 𝗚𝗶𝘃𝗲𝗻: <span style="color: gold;">$𝟏𝟎𝟒𝟖.𝟔𝟑</span></p>
             <br>	
-            <p><a href="leaderboard/totalprize-leaderboard.html">Click Here to view the Total Prize Leaderboard</a></p>
+            <p><a href="/AaronJay/leaderboard/totalprize-leaderboard/">Click Here to view the Total Prize Leaderboard</a></p>
         </div>
     </div>
 </div>
@@ -419,7 +419,7 @@
 </style>
 <footer>
 	<p>&copy; 2025 𝐀𝐚𝐫𝐨𝐧𝐉𝐚𝐲𝐒𝐩𝐢𝐧𝐳.𝐜𝐨𝐦. All rights reserved.</p>
-    	<p><a href="../policy.html#disclaimer">Terms of Service</a> | <a href="../policy.html#privacy-policy">Privacy Policy</a></p>
+    	<p><a href="/AaronJay/policy/#disclaimer">Terms of Service</a> | <a href="/AaronJay/policy/#privacy-policy">Privacy Policy</a></p>
 </footer>
 
 
